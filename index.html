@@ -275,6 +275,7 @@
       const [isListeningVoice, setIsListeningVoice] = useState(false);
       const [historyFilter, setHistoryFilter] = useState('Semua'); // 'Hari Ini' | 'Shift Aktif' | 'Semua'
       const [historySearch, setHistorySearch] = useState('');
+      const [isCleaningDuplicates, setIsCleaningDuplicates] = useState(false);
 
       // Modal & Notification State
       const [activeOrderReceipt, setActiveOrderReceipt] = useState(null);
@@ -397,6 +398,23 @@
           });
         } catch (err) {
           console.error('Gagal sync ke spreadsheet:', err);
+        }
+      };
+
+      const handleCleanDuplicates = async () => {
+        setIsCleaningDuplicates(true);
+        showToast('Sedang merapikan & membersihkan data member ganda...');
+        try {
+          const res = await postToDatabase({ action: 'cleanDuplicates' });
+          if (res && res.success) {
+            showToast(res.message || `Berhasil membersihkan ${res.duplicatesRemoved || 0} data ganda! 🎉`);
+          } else {
+            showToast(res?.message || 'Gagal membersihkan data ganda', 'error');
+          }
+        } catch (err) {
+          showToast('Koneksi terputus saat merapikan database', 'error');
+        } finally {
+          setIsCleaningDuplicates(false);
         }
       };
 
@@ -1466,14 +1484,14 @@
                       )}
                     </div>
 
-                    {/* FILTER CHIPS */}
-                    <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none text-xs">
+                    {/* FILTER CHIPS (TAMPILAN WRAP TANPA SWIPE KE SAMPING) */}
+                    <div className="flex flex-wrap gap-2 text-xs">
                       {[
                         { label: `Semua (${menuItems.length})`, val: 'Semua' },
                         { label: '🌯 Kebab', val: 'Cemilan' },
                         { label: '🍵 Matcha', val: 'Signature' },
                         { label: '☕ Kopi', val: 'Coffee' },
-                        { label: '🍃 Teh', val: 'Non Coffee' },
+                        { label: '🍃 Non Coffee', val: 'Non Coffee' },
                         { label: '🍊 Buah Segar', val: 'Fresh Drink' }
                       ].map(chip => (
                         <button 
@@ -1775,6 +1793,18 @@
                         </button>
                         <button onClick={() => showToast('Riwayat mutasi brankas telah disinkronkan!')} className="bg-slate-800 hover:bg-slate-700 text-slate-200 py-2.5 rounded-xl font-bold text-xs border border-slate-700 flex items-center justify-center gap-1.5">
                           📋 Mutasi
+                        </button>
+                      </div>
+
+                      {/* Tombol Pembersih Data Member Ganda */}
+                      <div className="pt-2 border-t border-slate-800">
+                        <button 
+                          onClick={handleCleanDuplicates}
+                          disabled={isCleaningDuplicates}
+                          className="w-full bg-slate-800/90 hover:bg-slate-800 text-amber-300 hover:text-amber-200 py-2.5 px-3 rounded-2xl font-bold text-xs border border-amber-500/30 flex items-center justify-center gap-2 transition active:scale-95 shadow"
+                        >
+                          <Sparkles className="w-4 h-4 text-amber-400" />
+                          <span>{isCleaningDuplicates ? 'Merapikan Database...' : '🧹 Bersihkan Data Member Ganda di Spreadsheet'}</span>
                         </button>
                       </div>
                     </div>
