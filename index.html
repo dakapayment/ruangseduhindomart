@@ -47,7 +47,7 @@
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-emerald-500 selection:text-white">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-emerald-500 selection:text-white overflow-x-hidden">
   
   <div id="root"></div>
 
@@ -223,8 +223,7 @@
       const [isLoadingPromos, setIsLoadingPromos] = useState(false);
       const [isSyncingSheets, setIsSyncingSheets] = useState(false);
 
-      // Customer Cart & Modals
-      const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+      // Menu Items & Customer Cart
       const [menuItems] = useState(INITIAL_MENU);
       const [cart, setCart] = useState([]);
       const [selectedCategory, setSelectedCategory] = useState('Semua');
@@ -232,35 +231,50 @@
       const [sugarLevel, setSugarLevel] = useState('Normal Sugar');
       const [orderNotes, setOrderNotes] = useState('');
       const [itemQty, setItemQty] = useState(1);
-      
       const [isCartOpen, setIsCartOpen] = useState(false);
       const [checkoutStep, setCheckoutStep] = useState('cart');
       const [selectedVoucher, setSelectedVoucher] = useState(null);
       const [showVoucherSelector, setShowVoucherSelector] = useState(false);
       const [promoInput, setPromoInput] = useState('');
+      const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
-      const [activeOrderReceipt, setActiveOrderReceipt] = useState(null);
-      const [scanQRInput, setScanQRInput] = useState('');
-      const [qrModalOpen, setQrModalOpen] = useState(false);
-      const [notification, setNotification] = useState(null);
-      const [adminPromoModal, setAdminPromoModal] = useState({ open: false, item: null });
+      // Daftar Voucher Pengguna (Mendukung format Array maupun JSON String dari Database/Spreadsheet)
+      const userVouchers = useMemo(() => {
+        if (!currentUser || !currentUser.myVouchers) return [];
+        if (typeof currentUser.myVouchers === 'string') {
+          try {
+            const parsed = JSON.parse(currentUser.myVouchers);
+            return Array.isArray(parsed) ? parsed : [];
+          } catch (e) {
+            return [];
+          }
+        }
+        return Array.isArray(currentUser.myVouchers) ? currentUser.myVouchers : [];
+      }, [currentUser]);
 
-      // POS KASIR STATE
+      // POS Kasir State
       const [posCategory, setPosCategory] = useState('Semua');
       const [posSearchQuery, setPosSearchQuery] = useState('');
       const [posCart, setPosCart] = useState([]);
       const [isPosCartModalOpen, setIsPosCartModalOpen] = useState(false);
       const [isPosPaymentModalOpen, setIsPosPaymentModalOpen] = useState(false);
       const [posCustomerName, setPosCustomerName] = useState('Pelanggan Umum');
-      const [posDiscountType, setPosDiscountType] = useState('none');
+      const [posDiscountType, setPosDiscountType] = useState('none'); // 'none' | 'percent' | 'fixed'
       const [posDiscountValue, setPosDiscountValue] = useState(0);
-      const [posPaymentMethod, setPosPaymentMethod] = useState('Tunai');
+      const [posPaymentMethod, setPosPaymentMethod] = useState('Tunai'); // 'Tunai' | 'QRIS' | 'Transfer'
       const [posCashReceived, setPosCashReceived] = useState(0);
       const [isListeningVoice, setIsListeningVoice] = useState(false);
-      const [historyFilter, setHistoryFilter] = useState('Semua');
+      const [historyFilter, setHistoryFilter] = useState('Semua'); // 'Hari Ini' | 'Shift Aktif' | 'Semua'
       const [historySearch, setHistorySearch] = useState('');
 
-      // Persistence Local Fallbacks
+      // Modal & Notification State
+      const [activeOrderReceipt, setActiveOrderReceipt] = useState(null);
+      const [scanQRInput, setScanQRInput] = useState('');
+      const [qrModalOpen, setQrModalOpen] = useState(false);
+      const [notification, setNotification] = useState(null);
+      const [adminPromoModal, setAdminPromoModal] = useState({ open: false, item: null });
+
+      // Persistence Effects
       useEffect(() => {
         if (currentUser) {
           localStorage.setItem('rs_current_user', JSON.stringify(currentUser));
@@ -287,8 +301,22 @@
         setIsLoadingPromos(true);
         try {
           const res = await fetch(SCRIPT_DATABASE_URL + '?action=getPosData');
-          const result = await res.json();
-          if (result.success) {
+          const rawText = await res.text();
+          let result;
+
+          try {
+            result = JSON.parse(rawText);
+          } catch (jsonErr) {
+            console.warn('Apps Script mengembalikan respons HTML:', rawText.slice(0, 120));
+            if (rawText.includes('<!DOCTYPE') || rawText.includes('<html')) {
+              if (showNotification) {
+                showToast("Izin Web App: Ubah 'Who has access' ke 'Anyone' saat Deploy!", 'error');
+              }
+            }
+            return;
+          }
+
+          if (result && result.success) {
             if (Array.isArray(result.promos)) setPromosList(result.promos);
             if (Array.isArray(result.orders)) setOrders(result.orders);
             if (Array.isArray(result.expenses)) setExpenses(result.expenses);
@@ -296,7 +324,7 @@
             if (showNotification) showToast('Data Kasir & Sheets berhasil disinkronkan! 🔄');
           }
         } catch (err) {
-          console.error('Gagal mengambil data dari Google Sheets:', err);
+          console.error('Koneksi Google Sheets terputus:', err);
           if (showNotification) showToast('Gagal sinkron dengan Spreadsheet. Periksa koneksi.', 'error');
         } finally {
           setIsSyncingSheets(false);
@@ -307,9 +335,14 @@
       const fetchPromosFromSpreadsheet = async () => {
         try {
           const res = await fetch(SCRIPT_DATABASE_URL + '?action=getPromos');
-          const result = await res.json();
-          if (result.success && Array.isArray(result.promos)) {
-            setPromosList(result.promos);
+          const rawText = await res.text();
+          try {
+            const result = JSON.parse(rawText);
+            if (result && result.success && Array.isArray(result.promos)) {
+              setPromosList(result.promos);
+            }
+          } catch (e) {
+            // Abaikan jika respons server bukan JSON valid
           }
         } catch (err) {
           console.error('Gagal mengambil promo:', err);
@@ -321,12 +354,21 @@
       }, []);
 
       const postToDatabase = async (payload) => {
-        const res = await fetch(SCRIPT_DATABASE_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
-        });
-        return await res.json();
+        try {
+          const res = await fetch(SCRIPT_DATABASE_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+          const rawText = await res.text();
+          try {
+            return JSON.parse(rawText);
+          } catch (e) {
+            return { success: false, message: 'Server mengembalikan respons non-JSON' };
+          }
+        } catch (netErr) {
+          return { success: false, message: 'Gagal terhubung ke jaringan Apps Script' };
+        }
       };
 
       const syncUserToSpreadsheet = async (updatedUser) => {
@@ -851,7 +893,7 @@
       }, [orders, expenses, shiftState]);
 
       return (
-        <div className={`min-h-screen ${darkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-800'} transition-colors duration-200 font-sans pb-28 md:pb-8 relative`}>
+        <div className={`min-h-screen ${darkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-800'} transition-colors duration-200 font-sans pb-28 md:pb-8 relative overflow-x-hidden`}>
           
           {/* TOAST NOTIFIKASI */}
           {notification && (
@@ -863,7 +905,7 @@
 
           {/* HEADER UTAMA */}
           <header className={`sticky top-0 z-30 backdrop-blur-md border-b ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white/90 border-slate-200'} px-4 py-3 shadow-sm`}>
-            <div className="max-w-6xl mx-auto flex items-center justify-between">
+            <div className="max-w-xl mx-auto flex items-center justify-between">
               
               {/* Logo & Judul */}
               <div className="flex items-center gap-3 cursor-pointer select-none group" onClick={handleLogoClick}>
@@ -928,11 +970,7 @@
                   {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                 </button>
 
-                {activeRole === 'customer' ? (
-                  <button onClick={() => { setPinInput(''); setPinError(''); setIsPinModalOpen(true); }} title="Buka Menu Kasir (Perlu PIN)" className="p-2.5 bg-emerald-100 dark:bg-emerald-950/50 text-[#0B8F5A] rounded-xl border border-emerald-200">
-                    <Store className="w-5 h-5" />
-                  </button>
-                ) : (
+                {activeRole === 'admin' && (
                   <button onClick={() => setIsShiftModalOpen(true)} title="Kelola Shift Kasir" className="p-2.5 bg-amber-100 dark:bg-amber-950/50 text-amber-600 rounded-xl border border-amber-200">
                     <RefreshCw className="w-5 h-5" />
                   </button>
@@ -941,7 +979,7 @@
             </div>
           </header>
 
-          <main className="max-w-6xl mx-auto px-4 pt-4">
+          <main className="max-w-xl mx-auto px-4 pt-4 w-full">
             
             {/* ========================================================================= */}
             {/* MODE PELANGGAN (CUSTOMER STOREFRONT)                                      */}
@@ -1371,35 +1409,39 @@
                       ))}
                     </div>
 
-                    {/* GRID MENU KASIR */}
+                    {/* GRID MENU KASIR (KLIK KARTU / NAMA LANGSUNG MENAMBAHKAN) */}
                     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-3">
                       {menuItems
                         .filter(item => (posCategory === 'Semua' || item.category === posCategory) && item.name.toLowerCase().includes(posSearchQuery.toLowerCase()))
                         .map(item => {
                           const inCart = posCart.find(c => c.productId === item.id);
                           return (
-                            <div key={item.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3 shadow-sm flex flex-col justify-between">
+                            <div 
+                              key={item.id} 
+                              onClick={() => addToPosCart(item, 1)}
+                              className={`bg-white dark:bg-slate-900 border rounded-2xl p-3 shadow-sm flex flex-col justify-between cursor-pointer select-none active:scale-95 transition-all duration-150 hover:shadow-md ${inCart ? 'border-[#0B8F5A] ring-2 ring-emerald-500/20 bg-emerald-50/20 dark:bg-emerald-950/20' : 'border-slate-200 dark:border-slate-800 hover:border-[#0B8F5A]'}`}
+                            >
                               <div>
-                                <div className="flex items-center justify-between mb-2">
+                                <div className="flex items-center justify-between mb-2 pointer-events-none">
                                   <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${item.category === 'Cemilan' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}`}>
                                     {item.category === 'Cemilan' ? 'MAKANAN' : item.category.toUpperCase()}
                                   </span>
                                   {inCart ? (
-                                    <span className="text-[10px] font-black bg-[#0B8F5A] text-white px-2 py-0.5 rounded-full">
+                                    <span className="text-[10px] font-black bg-[#0B8F5A] text-white px-2 py-0.5 rounded-full animate-pulse">
                                       {inCart.qty}x
                                     </span>
                                   ) : (
                                     <span className="text-[10px] text-slate-400 font-semibold">{item.stock || 40} porsi</span>
                                   )}
                                 </div>
-                                <h4 className="font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-100 line-clamp-1">{item.name}</h4>
+                                <h4 className="font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-100 line-clamp-2 leading-snug pointer-events-none">{item.name}</h4>
                               </div>
 
-                              <div className="flex items-center justify-between pt-3 mt-2 border-t border-slate-100 dark:border-slate-800">
+                              <div className="flex items-center justify-between pt-3 mt-2 border-t border-slate-100 dark:border-slate-800 pointer-events-none">
                                 <span className="text-xs sm:text-sm font-black text-[#0B8F5A]">Rp {item.price.toLocaleString('id-ID')}</span>
-                                <button onClick={() => addToPosCart(item, 1)} className="w-8 h-8 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-[#0B8F5A] border border-emerald-300 dark:border-emerald-800 flex items-center justify-center font-bold active:scale-95 shadow-sm">
+                                <div className="w-8 h-8 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-[#0B8F5A] border border-emerald-300 dark:border-emerald-800 flex items-center justify-center font-bold shadow-sm">
                                   <Plus className="w-4 h-4" />
-                                </button>
+                                </div>
                               </div>
                             </div>
                           );
@@ -2213,19 +2255,31 @@
                     <div className="space-y-4">
                       <div className="bg-amber-500/10 border border-amber-500/30 p-3.5 rounded-2xl space-y-3">
                         <div className="flex justify-between items-center text-xs font-bold text-amber-600">
-                          <span>Klaim Kode Promo / Voucher</span>
-                          <button onClick={() => setShowVoucherSelector(!showVoucherSelector)} className="text-[#0B8F5A]">
-                            {showVoucherSelector ? 'Sembunyikan' : 'Pilih dari Stok Saya'}
+                          <span className="flex items-center gap-1.5">
+                            <Ticket className="w-4 h-4 text-amber-500" />
+                            Klaim Kode Promo / Voucher
+                          </span>
+                          <button 
+                            type="button"
+                            onClick={() => setShowVoucherSelector(!showVoucherSelector)} 
+                            className="text-[#0B8F5A] bg-white dark:bg-slate-800 px-2.5 py-1 rounded-lg border border-emerald-300 dark:border-emerald-800 font-bold text-[11px] shadow-sm hover:bg-emerald-50 dark:hover:bg-emerald-950 transition"
+                          >
+                            {showVoucherSelector ? 'Tutup Stok' : `Pilih dari Stok Saya (${userVouchers.length})`}
                           </button>
                         </div>
 
                         {selectedVoucher ? (
-                          <div className="flex justify-between items-center bg-white dark:bg-slate-800 p-2.5 rounded-xl border border-emerald-500">
-                            <div>
-                              <p className="text-xs font-bold text-slate-800 dark:text-slate-100">{selectedVoucher.name}</p>
-                              <span className="text-[10px] text-emerald-600 font-bold">-Rp {discountAmount.toLocaleString('id-ID')}</span>
+                          <div className="flex justify-between items-center bg-white dark:bg-slate-800 p-2.5 rounded-xl border border-emerald-500 shadow-sm">
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-950 text-[#0B8F5A] flex items-center justify-center font-bold">
+                                <Ticket className="w-4 h-4" />
+                              </div>
+                              <div>
+                                <p className="text-xs font-bold text-slate-800 dark:text-slate-100">{selectedVoucher.name}</p>
+                                <span className="text-[10px] text-emerald-600 font-black">-Rp {discountAmount.toLocaleString('id-ID')}</span>
+                              </div>
                             </div>
-                            <button onClick={() => setSelectedVoucher(null)} className="text-rose-500 text-[10px] font-bold bg-rose-50 dark:bg-rose-950 px-2 py-1 rounded">Batal</button>
+                            <button onClick={() => setSelectedVoucher(null)} className="text-rose-500 text-[10px] font-bold bg-rose-50 dark:bg-rose-950 px-2.5 py-1.5 rounded-lg hover:bg-rose-100">Batal</button>
                           </div>
                         ) : (
                           <div className="flex gap-2">
@@ -2234,7 +2288,7 @@
                               value={promoInput} 
                               onChange={(e) => setPromoInput(e.target.value)} 
                               placeholder="MASUKKAN KODE PROMO" 
-                              className="flex-1 bg-white dark:bg-slate-800 border p-2.5 rounded-xl text-xs font-mono uppercase outline-none"
+                              className="flex-1 bg-white dark:bg-slate-800 border p-2.5 rounded-xl text-xs font-mono uppercase outline-none focus:ring-2 focus:ring-[#0B8F5A]"
                             />
                             <button onClick={() => {
                               const match = promosList.find(p => p.code.toUpperCase() === promoInput.trim().toUpperCase());
@@ -2243,6 +2297,93 @@
                               setPromoInput('');
                               showToast(`Promo ${match.code} aktif!`);
                             }} className="bg-slate-900 text-amber-400 font-bold text-xs px-4 rounded-xl shadow">Gunakan</button>
+                          </div>
+                        )}
+
+                        {/* DAFTAR STOK VOUCHER MILIK PENGGUNA */}
+                        {showVoucherSelector && (
+                          <div className="pt-2 border-t border-amber-500/20 space-y-2">
+                            <div className="flex items-center justify-between text-[11px] font-semibold text-slate-600 dark:text-slate-300">
+                              <span>Voucher Tersedia di Akun:</span>
+                              <span className="font-bold text-[#0B8F5A]">{userVouchers.length} Tersedia</span>
+                            </div>
+
+                            {!currentUser ? (
+                              <div className="bg-white dark:bg-slate-800 p-3 rounded-xl border border-dashed border-amber-300 text-center space-y-2">
+                                <p className="text-[11px] text-slate-500">Silakan login untuk menggunakan voucher Anda.</p>
+                                <button
+                                  type="button"
+                                  onClick={() => { setIsLoginModalOpen(true); setIsCartOpen(false); }}
+                                  className="bg-[#0B8F5A] text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow"
+                                >
+                                  Login Akun Sekarang
+                                </button>
+                              </div>
+                            ) : userVouchers.length === 0 ? (
+                              <div className="bg-white dark:bg-slate-800 p-3 rounded-xl border border-dashed border-slate-200 dark:border-slate-700 text-center space-y-2">
+                                <p className="text-[11px] text-slate-400 italic">Belum ada voucher aktif di akun Anda.</p>
+                                <button
+                                  type="button"
+                                  onClick={() => { setCurrentTab('reward'); setIsCartOpen(false); }}
+                                  className="text-[11px] font-bold text-[#0B8F5A] hover:underline"
+                                >
+                                  Tukarkan Poin di Menu Reward &gt;
+                                </button>
+                              </div>
+                            ) : (
+                              <div className="max-h-44 overflow-y-auto space-y-2 scrollbar-none pr-0.5">
+                                {userVouchers.map((v, idx) => {
+                                  const isCurrentSelected = selectedVoucher && selectedVoucher.id === v.id;
+                                  return (
+                                    <div
+                                      key={v.id || idx}
+                                      className={`p-2.5 rounded-xl border transition flex items-center justify-between gap-2 ${
+                                        isCurrentSelected
+                                          ? 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-500 shadow-sm'
+                                          : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-[#0B8F5A]'
+                                      }`}
+                                    >
+                                      <div className="flex-1 min-w-0">
+                                        <div className="flex items-center gap-1.5">
+                                          <Ticket className="w-3.5 h-3.5 text-[#0B8F5A] shrink-0" />
+                                          <h5 className="font-bold text-xs truncate text-slate-800 dark:text-slate-100">{v.name}</h5>
+                                        </div>
+                                        <div className="flex items-center gap-2 mt-0.5">
+                                          <span className="text-[10px] font-mono text-slate-400">
+                                            {v.code ? `KODE: ${v.code}` : 'VOUCHER MEMBER'}
+                                          </span>
+                                          <span className="text-[11px] font-black text-[#0B8F5A]">
+                                            {v.type === 'percent'
+                                              ? `Diskon ${v.discountPercent}%`
+                                              : `Potongan Rp ${(v.discountAmount || 15000).toLocaleString('id-ID')}`}
+                                          </span>
+                                        </div>
+                                      </div>
+                                      <button
+                                        type="button"
+                                        onClick={() => {
+                                          if (isCurrentSelected) {
+                                            setSelectedVoucher(null);
+                                            showToast('Voucher dilepas.');
+                                          } else {
+                                            setSelectedVoucher(v);
+                                            setShowVoucherSelector(false);
+                                            showToast(`Voucher "${v.name}" dipasang!`);
+                                          }
+                                        }}
+                                        className={`px-3 py-1.5 rounded-xl text-xs font-bold transition shrink-0 ${
+                                          isCurrentSelected
+                                            ? 'bg-rose-500 text-white'
+                                            : 'bg-[#0B8F5A] text-white hover:bg-emerald-600 shadow'
+                                        }`}
+                                      >
+                                        {isCurrentSelected ? 'Lepas' : 'Gunakan'}
+                                      </button>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            )}
                           </div>
                         )}
                       </div>
