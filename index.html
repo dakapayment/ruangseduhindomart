@@ -218,13 +218,22 @@
       });
       const [isExpenseModalOpen, setIsExpenseModalOpen] = useState(false);
 
+      // Menu Items & Customer Cart
+      const [menuItems, setMenuItems] = useState(() => {
+        const saved = localStorage.getItem('rs_menu_items');
+        if (saved) {
+          try { return JSON.parse(saved); } catch (e) {}
+        }
+        return INITIAL_MENU;
+      });
+      const [isEditMode, setIsEditMode] = useState(false);
+      const [productModal, setProductModal] = useState({ open: false, item: null });
+
       // PROMO VOUCHER (Sheets Integration)
       const [promosList, setPromosList] = useState([]);
       const [isLoadingPromos, setIsLoadingPromos] = useState(false);
       const [isSyncingSheets, setIsSyncingSheets] = useState(false);
 
-      // Menu Items & Customer Cart
-      const [menuItems] = useState(INITIAL_MENU);
       const [cart, setCart] = useState([]);
       const [selectedCategory, setSelectedCategory] = useState('Semua');
       const [selectedProduct, setSelectedProduct] = useState(null);
@@ -295,6 +304,10 @@
         localStorage.setItem('rs_pos_expenses', JSON.stringify(expenses));
       }, [expenses]);
 
+      useEffect(() => {
+        localStorage.setItem('rs_menu_items', JSON.stringify(menuItems));
+      }, [menuItems]);
+
       // Ambil Seluruh Data POS Langsung dari Google Sheets saat Web Dibuka / Refresh
       const fetchAllDataFromSpreadsheet = async (showNotification = false) => {
         setIsSyncingSheets(true);
@@ -317,11 +330,12 @@
           }
 
           if (result && result.success) {
+            if (Array.isArray(result.menu) && result.menu.length > 0) setMenuItems(result.menu);
             if (Array.isArray(result.promos)) setPromosList(result.promos);
             if (Array.isArray(result.orders)) setOrders(result.orders);
             if (Array.isArray(result.expenses)) setExpenses(result.expenses);
             if (result.shift && typeof result.shift.isOpen === 'boolean') setShiftState(result.shift);
-            if (showNotification) showToast('Data Kasir & Sheets berhasil disinkronkan! 🔄');
+            if (showNotification) showToast('Data Kasir, Menu & Sheets berhasil disinkronkan! 🔄');
           }
         } catch (err) {
           console.error('Koneksi Google Sheets terputus:', err);
@@ -404,7 +418,7 @@
           setPinError('');
           setIsPinModalOpen(true);
         } else {
-          if (nextCount >= 3) showToast(`Klik ${5 - nextCount}x lagi untuk verifikasi PIN Kasir...`, 'error');
+          // Klik dihitung senyap tanpa notifikasi toast
           clickTimerRef.current = setTimeout(() => { setLogoClicks(0); }, 2500);
         }
       };
@@ -514,6 +528,40 @@
           }];
         });
         showToast(`+${count}x ${product.name} masuk kasir!`);
+      };
+
+      // Simpan Menu Baru atau Update Menu ke State & Google Sheets
+      const handleSaveProduct = async (productData) => {
+        setMenuItems(prev => {
+          const idx = prev.findIndex(p => p.id === productData.id);
+          if (idx > -1) {
+            const updated = [...prev];
+            updated[idx] = productData;
+            return updated;
+          }
+          return [productData, ...prev];
+        });
+        setProductModal({ open: false, item: null });
+        showToast(`Menu "${productData.name}" berhasil disimpan! 🎉`);
+
+        try {
+          await postToDatabase({ action: 'saveMenuItem', item: productData });
+        } catch (err) {
+          console.error('Gagal simpan menu ke Sheets:', err);
+        }
+      };
+
+      // Hapus Menu dari State & Google Sheets
+      const handleDeleteProduct = async (productId) => {
+        setMenuItems(prev => prev.filter(p => p.id !== productId));
+        setProductModal({ open: false, item: null });
+        showToast('Menu berhasil dihapus!');
+
+        try {
+          await postToDatabase({ action: 'deleteMenuItem', id: productId });
+        } catch (err) {
+          console.error('Gagal hapus menu dari Sheets:', err);
+        }
       };
 
       const updatePosCartQty = (productId, delta) => {
@@ -1372,6 +1420,35 @@
                       </div>
                     </div>
 
+                    {/* BILAH KELOLA MENU & MODE EDIT PRODUK */}
+                    <div className="flex items-center justify-between bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#0B8F5A]"></span>
+                        <span className="text-xs font-bold text-slate-700 dark:text-slate-200">
+                          {isEditMode ? 'Mode Edit Menu Aktif' : `Katalog Menu (${menuItems.length})`}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => setIsEditMode(!isEditMode)}
+                          className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition ${
+                            isEditMode 
+                              ? 'bg-amber-500 text-slate-900 shadow-md ring-2 ring-amber-400/40' 
+                              : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200'
+                          }`}
+                        >
+                          <span>{isEditMode ? '✓ Selesai Edit' : '✏️ Edit Menu'}</span>
+                        </button>
+                        <button
+                          onClick={() => setProductModal({ open: true, item: null })}
+                          className="bg-[#0B8F5A] hover:bg-emerald-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 shadow"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                          <span>+ Menu Baru</span>
+                        </button>
+                      </div>
+                    </div>
+
                     {/* SEARCH INPUT MENU KASIR */}
                     <div className="relative">
                       <Search className="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400" />
@@ -1409,7 +1486,7 @@
                       ))}
                     </div>
 
-                    {/* GRID MENU KASIR (KLIK KARTU / NAMA LANGSUNG MENAMBAHKAN) */}
+                    {/* GRID MENU KASIR (KLIK KARTU LANGSUNG MENAMBAHKAN / MEMBUKA MODAL JIKA MODE EDIT) */}
                     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-3">
                       {menuItems
                         .filter(item => (posCategory === 'Semua' || item.category === posCategory) && item.name.toLowerCase().includes(posSearchQuery.toLowerCase()))
@@ -1418,20 +1495,41 @@
                           return (
                             <div 
                               key={item.id} 
-                              onClick={() => addToPosCart(item, 1)}
-                              className={`bg-white dark:bg-slate-900 border rounded-2xl p-3 shadow-sm flex flex-col justify-between cursor-pointer select-none active:scale-95 transition-all duration-150 hover:shadow-md ${inCart ? 'border-[#0B8F5A] ring-2 ring-emerald-500/20 bg-emerald-50/20 dark:bg-emerald-950/20' : 'border-slate-200 dark:border-slate-800 hover:border-[#0B8F5A]'}`}
+                              onClick={() => {
+                                if (isEditMode) {
+                                  setProductModal({ open: true, item });
+                                } else {
+                                  addToPosCart(item, 1);
+                                }
+                              }}
+                              className={`bg-white dark:bg-slate-900 border rounded-2xl p-3 shadow-sm flex flex-col justify-between cursor-pointer select-none active:scale-95 transition-all duration-150 hover:shadow-md relative ${
+                                isEditMode 
+                                  ? 'border-amber-400 ring-2 ring-amber-400/30 bg-amber-50/20' 
+                                  : inCart 
+                                    ? 'border-[#0B8F5A] ring-2 ring-emerald-500/20 bg-emerald-50/20 dark:bg-emerald-950/20' 
+                                    : 'border-slate-200 dark:border-slate-800 hover:border-[#0B8F5A]'
+                              }`}
                             >
+                              {/* Badge Edit Mode */}
+                              {isEditMode && (
+                                <div className="absolute top-2 right-2 bg-amber-500 text-slate-900 text-[10px] font-black px-2 py-0.5 rounded-full shadow">
+                                  ✏️ Edit
+                                </div>
+                              )}
+
                               <div>
                                 <div className="flex items-center justify-between mb-2 pointer-events-none">
                                   <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${item.category === 'Cemilan' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}`}>
                                     {item.category === 'Cemilan' ? 'MAKANAN' : item.category.toUpperCase()}
                                   </span>
-                                  {inCart ? (
-                                    <span className="text-[10px] font-black bg-[#0B8F5A] text-white px-2 py-0.5 rounded-full animate-pulse">
-                                      {inCart.qty}x
-                                    </span>
-                                  ) : (
-                                    <span className="text-[10px] text-slate-400 font-semibold">{item.stock || 40} porsi</span>
+                                  {!isEditMode && (
+                                    inCart ? (
+                                      <span className="text-[10px] font-black bg-[#0B8F5A] text-white px-2 py-0.5 rounded-full animate-pulse">
+                                        {inCart.qty}x
+                                      </span>
+                                    ) : (
+                                      <span className="text-[10px] text-slate-400 font-semibold">{item.stock || 40} porsi</span>
+                                    )
                                   )}
                                 </div>
                                 <h4 className="font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-100 line-clamp-2 leading-snug pointer-events-none">{item.name}</h4>
@@ -1439,8 +1537,12 @@
 
                               <div className="flex items-center justify-between pt-3 mt-2 border-t border-slate-100 dark:border-slate-800 pointer-events-none">
                                 <span className="text-xs sm:text-sm font-black text-[#0B8F5A]">Rp {item.price.toLocaleString('id-ID')}</span>
-                                <div className="w-8 h-8 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-[#0B8F5A] border border-emerald-300 dark:border-emerald-800 flex items-center justify-center font-bold shadow-sm">
-                                  <Plus className="w-4 h-4" />
+                                <div className={`w-8 h-8 rounded-xl flex items-center justify-center font-bold shadow-sm ${
+                                  isEditMode 
+                                    ? 'bg-amber-100 text-amber-800 border border-amber-300' 
+                                    : 'bg-emerald-50 dark:bg-emerald-950 text-[#0B8F5A] border border-emerald-300 dark:border-emerald-800'
+                                }`}>
+                                  {isEditMode ? '✎' : <Plus className="w-4 h-4" />}
                                 </div>
                               </div>
                             </div>
@@ -2574,6 +2676,129 @@
                 </p>
 
               </div>
+            </div>
+          )}
+
+          {/* MODAL 12: EDIT & TAMBAH MENU KEDAI */}
+          {productModal.open && (
+            <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                const fd = new FormData(e.target);
+                const editedItem = {
+                  id: productModal.item ? productModal.item.id : `m_${Date.now()}`,
+                  name: fd.get('name').trim(),
+                  category: fd.get('category'),
+                  price: Number(fd.get('price')) || 0,
+                  stock: Number(fd.get('stock')) || 40,
+                  desc: fd.get('desc').trim(),
+                  image: fd.get('image').trim() || 'https://images.bukaolshop.com/hosting/38154/08b5850b46db416355.png'
+                };
+                handleSaveProduct(editedItem);
+              }} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-sm w-full p-6 space-y-3.5 shadow-2xl">
+                <div className="flex items-center justify-between border-b pb-2">
+                  <h3 className="font-bold text-base flex items-center gap-2">
+                    <span>{productModal.item ? '✏️ Edit Menu Minuman' : '＋ Tambah Menu Baru'}</span>
+                  </h3>
+                  <button type="button" onClick={() => setProductModal({ open: false, item: null })} className="text-slate-400">
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <div>
+                  <label className="text-[11px] font-bold block mb-1 text-slate-500 uppercase">Nama Menu *</label>
+                  <input 
+                    name="name" 
+                    defaultValue={productModal.item?.name || ''} 
+                    required 
+                    placeholder="Contoh: Kopi Gula Aren Special" 
+                    className="w-full p-2.5 rounded-xl border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-bold outline-none focus:ring-2 focus:ring-[#0B8F5A]"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="text-[11px] font-bold block mb-1 text-slate-500 uppercase">Kategori *</label>
+                    <select 
+                      name="category" 
+                      defaultValue={productModal.item?.category || 'Coffee'} 
+                      className="w-full p-2.5 rounded-xl border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-bold outline-none"
+                    >
+                      <option value="Coffee">Coffee</option>
+                      <option value="Signature">Signature</option>
+                      <option value="Non Coffee">Non Coffee</option>
+                      <option value="Fresh Drink">Fresh Drink</option>
+                      <option value="Cemilan">Cemilan</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-[11px] font-bold block mb-1 text-slate-500 uppercase">Harga Jual (Rp) *</label>
+                    <input 
+                      name="price" 
+                      type="number" 
+                      defaultValue={productModal.item?.price || 15000} 
+                      required 
+                      className="w-full p-2.5 rounded-xl border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-mono font-bold outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="text-[11px] font-bold block mb-1 text-slate-500 uppercase">Stok / Porsi</label>
+                    <input 
+                      name="stock" 
+                      type="number" 
+                      defaultValue={productModal.item?.stock !== undefined ? productModal.item.stock : 50} 
+                      required 
+                      className="w-full p-2.5 rounded-xl border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-mono font-bold outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[11px] font-bold block mb-1 text-slate-500 uppercase">Link URL Foto</label>
+                    <input 
+                      name="image" 
+                      type="url" 
+                      defaultValue={productModal.item?.image || ''} 
+                      placeholder="https://..." 
+                      className="w-full p-2.5 rounded-xl border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-[11px] outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-[11px] font-bold block mb-1 text-slate-500 uppercase">Deskripsi Singkat</label>
+                  <textarea 
+                    name="desc" 
+                    rows={2} 
+                    defaultValue={productModal.item?.desc || ''} 
+                    placeholder="Racikan kopi robusta dan susu..." 
+                    className="w-full p-2.5 rounded-xl border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs outline-none"
+                  />
+                </div>
+
+                <div className="flex gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                  {productModal.item && (
+                    <button 
+                      type="button" 
+                      onClick={() => {
+                        if (confirm(`Hapus menu "${productModal.item.name}"?`)) {
+                          handleDeleteProduct(productModal.item.id);
+                        }
+                      }}
+                      className="bg-rose-600 hover:bg-rose-700 text-white px-3.5 py-3 rounded-xl font-bold text-xs shadow"
+                    >
+                      Hapus
+                    </button>
+                  )}
+                  <button 
+                    type="submit" 
+                    className="flex-1 bg-[#0B8F5A] hover:bg-emerald-600 text-white py-3 rounded-xl font-black text-xs shadow-lg"
+                  >
+                    {productModal.item ? 'Simpan Perubahan Menu' : '+ Tambahkan ke Menu'}
+                  </button>
+                </div>
+              </form>
             </div>
           )}
 
