@@ -86,13 +86,27 @@
     const Store = ({ className = "w-5 h-5" }) => (<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1-2 2 2 2 0 0 1-2-2"/></svg>);
     const Package = ({ className = "w-5 h-5" }) => (<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>);
     const Lock = ({ className = "w-5 h-5" }) => (<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>);
-    const Key = ({ className = "w-5 h-5" }) => (<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>);
+    const CashRegister = ({ className = "w-8 h-8" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2"/>
+        <line x1="2" y1="10" x2="22" y2="10"/>
+        <line x1="6" y1="6" x2="6.01" y2="6"/>
+        <line x1="10" y1="6" x2="10.01" y2="6"/>
+        <line x1="14" y1="6" x2="14.01" y2="6"/>
+        <path d="M6 14h.01M10 14h.01M14 14h.01M18 14h.01M6 18h12a2 2 0 0 1 2 2v1H4v-1a2 2 0 0 1 2-2z"/>
+      </svg>
+    );
 
     const INITIAL_MENU = [
+      { id: 'm21', name: 'Kebab Daging', category: 'Cemilan', price: 15000, desc: 'Kebab hangat isi irisan daging sapi panggang gurih pilihan.', image: 'https://images.bukaolshop.com/hosting/38154/d223870bbc2a594156.png', stock: 30 },
+      { id: 'm20', name: 'Kebab Ayam', category: 'Cemilan', price: 10000, desc: 'Kebab hangat isi potongan daging ayam berbumbu rempah & saus mayo.', image: 'https://images.bukaolshop.com/hosting/38154/19986bb6fc4e351553.png', stock: 35 },
+      { id: 'm22', name: 'Burger Ayam', category: 'Cemilan', price: 12000, desc: 'Burger roti empuk dengan patty ayam gurih dan saus spesial.', image: 'https://images.bukaolshop.com/hosting/38154/19986bb6fc4e351553.png', stock: 25 },
+      { id: 'm23', name: 'Burger Daging', category: 'Cemilan', price: 15000, desc: 'Burger lezat dengan patty daging sapi panggang kaya rempah.', image: 'https://images.bukaolshop.com/hosting/38154/d223870bbc2a594156.png', stock: 20 },
+      { id: 'm19', name: 'Macha Latte (Ori)', category: 'Signature', price: 15000, desc: 'Resep macha murni creamy otentik.', image: 'https://images.bukaolshop.com/hosting/38154/235350793d64335365.png', stock: 40 },
+      { id: 'm15', name: 'Jeruk peras', category: 'Fresh Drink', price: 10000, desc: 'Jeruk peras murni tradisional dengan es batu.', image: 'https://images.bukaolshop.com/hosting/38154/2eb01ccfbe56865906.png', stock: 40 },
       { id: 'm16', name: 'Signature Macha Strawberi', category: 'Signature', price: 18000, desc: 'Resep macha creamy dengan sensasi stroberi segar.', image: 'https://images.bukaolshop.com/hosting/38154/9bfab6fae61d971132.png', stock: 42 },
       { id: 'm17', name: 'Signature Macha Oreo', category: 'Signature', price: 18000, desc: 'Resep macha creamy dengan taburan oreo renyah.', image: 'https://images.bukaolshop.com/hosting/38154/a60514717565193799.png', stock: 46 },
       { id: 'm18', name: 'Signature Macha Caramel', category: 'Signature', price: 18000, desc: 'Resep macha creamy dengan sirup karamel gurih.', image: 'https://images.bukaolshop.com/hosting/38154/9f704fc0ca29938403.png', stock: 38 },
-      { id: 'm19', name: 'Macha Latte (Ori)', category: 'Signature', price: 15000, desc: 'Resep macha murni creamy otentik.', image: 'https://images.bukaolshop.com/hosting/38154/235350793d64335365.png', stock: 40 },
       { id: 'm1', name: 'Mocha Intenso', category: 'Coffee', price: 15000, desc: 'Perpaduan coklat premium dengan kopi robusta pilihan.', image: 'https://images.bukaolshop.com/hosting/38154/08b5850b46db416355.png', stock: 50 },
       { id: 'm2', name: 'Kopi Gula Aren', category: 'Coffee', price: 15000, desc: 'Paduan espresso kaya rasa, susu creamy, dan gula aren organik spesial.', image: 'https://images.bukaolshop.com/hosting/38154/7962862d9d07489063.png', stock: 55 },
       { id: 'm3', name: 'Coffee Butterscotch', category: 'Coffee', price: 15000, desc: 'Coffee Butterscotch dengan aroma butter manis legit.', image: 'https://images.bukaolshop.com/hosting/38154/8dd5ab18c9b1471610.png', stock: 35 },
@@ -109,10 +123,7 @@
       { id: 'm7', name: 'Sunkist Yakult', category: 'Fresh Drink', price: 18000, desc: 'Segarnya jeruk sunkist berpadu probiotik Yakult.', image: 'https://images.bukaolshop.com/hosting/38154/4b0a947fb743823248.png', stock: 25 },
       { id: 'm12', name: 'Sunkist Madu', category: 'Fresh Drink', price: 18000, desc: 'Jeruk sunkist asli dengan madu alami yang menyehatkan.', image: 'https://images.bukaolshop.com/hosting/38154/9054a709a3ba416287.png', stock: 25 },
       { id: 'm13', name: 'Lemonada fresca', category: 'Fresh Drink', price: 10000, desc: 'Minuman soda perasan lemon dingin segar.', image: 'https://images.bukaolshop.com/hosting/38154/c1d6d3508153784226.png', stock: 35 },
-      { id: 'm14', name: 'Peach tea Sprite', category: 'Fresh Drink', price: 15000, desc: 'Aroma buah persik berpadu soda berkarbonasi.', image: 'https://images.bukaolshop.com/hosting/38154/2f7709ac229c539346.png', stock: 20 },
-      { id: 'm15', name: 'Jeruk peras', category: 'Fresh Drink', price: 10000, desc: 'Jeruk peras murni tradisional dengan es batu.', image: 'https://images.bukaolshop.com/hosting/38154/2eb01ccfbe56865906.png', stock: 40 },
-      { id: 'm20', name: 'Kebab Ayam', category: 'Cemilan', price: 10000, desc: 'Kebab hangat isi potongan daging ayam berbumbu rempah & saus mayo.', image: 'https://images.bukaolshop.com/hosting/38154/19986bb6fc4e351553.png', stock: 35 },
-      { id: 'm21', name: 'Kebab Daging', category: 'Cemilan', price: 15000, desc: 'Kebab hangat isi irisan daging sapi panggang gurih pilihan.', image: 'https://images.bukaolshop.com/hosting/38154/d223870bbc2a594156.png', stock: 30 }
+      { id: 'm14', name: 'Peach tea Sprite', category: 'Fresh Drink', price: 15000, desc: 'Aroma buah persik berpadu soda berkarbonasi.', image: 'https://images.bukaolshop.com/hosting/38154/2f7709ac229c539346.png', stock: 20 }
     ];
 
     const INITIAL_REWARDS = [
@@ -121,7 +132,6 @@
       { id: 'r5', name: 'Voucher Kopi Aren Gratis', points: 15000, type: 'Voucher Minuman', desc: 'Nikmati 1 cup Kopi Gula Aren spesial cuma-cuma', discountAmount: 15000 }
     ];
 
-    // DATA ANGGOTA MEMBER RESMI YANG SUDAH TERDAFTAR DI DATABASE ANDA
     const EXISTING_MEMBERS = [
       { id: 'u_17857517030', name: 'IMAMSERPUL', phone: '085351708411', password: '123456', points: 100, myVouchers: [{ id: 'v_welcome', name: 'Voucher Selamat Datang Rp 15.000', discountAmount: 15000, type: 'fixed' }] },
       { id: 'u_17857522771', name: 'IMAM NAWAWI', phone: '085831081204', password: '140902', points: 227, myVouchers: [{ id: 'v_reward_1785757405281', name: 'POTONGAN HARGA 10 RIBU', code: 'RW-9124', discountAmount: 10000, type: 'fixed' }, { id: 'v_welcome', name: 'Voucher Selamat Datang Rp 15.000', discountAmount: 15000, type: 'fixed' }] },
@@ -148,15 +158,44 @@
       return str;
     };
 
-    // Synthesized Audio Chime for Notifications
+    const getISODateStr = (d) => {
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+
+    // Helper ekstraksi tanggal fleksibel yang mengenali semua format tanggal dari Google Sheets
+    const getLocalDateStr = (dateInput) => {
+      if (!dateInput) return '';
+      if (typeof dateInput === 'string') {
+        const trimmed = dateInput.trim();
+        // Cek jika format YYYY-MM-DD
+        const isoMatch = trimmed.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})/);
+        if (isoMatch) {
+          return `${isoMatch[1]}-${String(isoMatch[2]).padStart(2, '0')}-${String(isoMatch[3]).padStart(2, '0')}`;
+        }
+        // Cek jika format DD/MM/YYYY atau DD-MM-YYYY (khas Google Sheets format Indonesia)
+        const dmyMatch = trimmed.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})/);
+        if (dmyMatch) {
+          return `${dmyMatch[3]}-${String(dmyMatch[2]).padStart(2, '0')}-${String(dmyMatch[1]).padStart(2, '0')}`;
+        }
+      }
+      const d = new Date(dateInput);
+      if (!isNaN(d.getTime())) {
+        return getISODateStr(d);
+      }
+      return String(dateInput).slice(0, 10);
+    };
+
     const playOrderChime = () => {
       try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
-        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.15); // A5
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.15);
         gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
         osc.connect(gain);
@@ -167,28 +206,26 @@
     };
 
     function App() {
-      // LINK GOOGLE APPS SCRIPT DATABASE RESMI ANDA
       const SCRIPT_DATABASE_URL = 'https://script.google.com/macros/s/AKfycbz-Y_QDxKb7HH4jHdiAnVNUW7sF-f_DPeZLmJDVkyThQ0C5z7NU_nYHcOrFEwP01hng2w/exec';
       const TELEGRAM_TOKEN = '8993074889:AAHLq5-NSGZxJkEYE6meNnmUKt-kRPW32CE';
       const TELEGRAM_CHAT_ID = '6085581813';
 
-      // Roles & Views
-      const [activeRole, setActiveRole] = useState('customer'); // 'customer' | 'admin'
-      const [currentTab, setCurrentTab] = useState('home'); // 'home' | 'menu' | 'reward' | 'orders' | 'profile'
-      const [adminTab, setAdminTab] = useState('kasir'); // 'kasir' | 'riwayat' | 'belanja' | 'brankas' | 'promo'
+      // Roles & Navigation
+      const [activeRole, setActiveRole] = useState('customer');
+      const [currentTab, setCurrentTab] = useState('home');
+      const [adminTab, setAdminTab] = useState('kasir');
       const [darkMode, setDarkMode] = useState(false);
 
-      // PIN Keamanan Menu Kasir (Hanya Kasir/Owner yang tahu)
+      // PIN Kasir
       const CASHIER_SECRET_PIN = '1122';
       const [isPinModalOpen, setIsPinModalOpen] = useState(false);
       const [pinInput, setPinInput] = useState('');
       const [pinError, setPinError] = useState('');
 
-      // Secret Logo Click to enter Admin
       const [logoClicks, setLogoClicks] = useState(0);
       const clickTimerRef = useRef(null);
 
-      // User & Orders State
+      // User & Orders
       const [authMode, setAuthMode] = useState('login');
       const [isLoadingAuth, setIsLoadingAuth] = useState(false);
       const [currentUser, setCurrentUser] = useState(() => {
@@ -207,18 +244,39 @@
       // Shift Kasir State
       const [shiftState, setShiftState] = useState(() => {
         const saved = localStorage.getItem('rs_pos_shift');
-        return saved ? JSON.parse(saved) : { isOpen: false, cashierName: 'Roy', modalAwal: 261000, openedAt: null };
+        return saved ? JSON.parse(saved) : { isOpen: false, cashierName: 'Kasir 1', modalAwal: 100000, openedAt: null };
       });
       const [isShiftModalOpen, setIsShiftModalOpen] = useState(false);
+      const [shiftModalInputName, setShiftModalInputName] = useState('Kasir 1');
+      const [shiftModalInputModal, setShiftModalInputModal] = useState(100000);
+      const [uangFisikNyataInput, setUangFisikNyataInput] = useState(100000);
 
-      // Belanja Kedai (Pengeluaran Kedai)
+      // Saldo Fisik Terakhir dari Sheet Mutasi Kas
+      const [saldoFisikTerakhir, setSaldoFisikTerakhir] = useState(() => {
+        const saved = localStorage.getItem('rs_saldo_fisik_terakhir');
+        return saved ? Number(saved) : 0;
+      });
+
+      // Belanja Kedai
       const [expenses, setExpenses] = useState(() => {
         const saved = localStorage.getItem('rs_pos_expenses');
         return saved ? JSON.parse(saved) : [];
       });
       const [isExpenseModalOpen, setIsExpenseModalOpen] = useState(false);
+      const [expenseFilter, setExpenseFilter] = useState('Hari Ini');
 
-      // Menu Items & Customer Cart
+      // Filter Periode Admin & Kas (Hari Ini vs Kemarin)
+      const [kasPeriod, setKasPeriod] = useState('Hari Ini');
+
+      // Tarik Saldo QRIS
+      const [qrisWithdrawn, setQrisWithdrawn] = useState(() => {
+        const saved = localStorage.getItem('rs_qris_withdrawn');
+        return saved ? Number(saved) : 0;
+      });
+      const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false);
+      const [withdrawAmountInput, setWithdrawAmountInput] = useState('');
+
+      // Menu Items & Storefront
       const [menuItems, setMenuItems] = useState(() => {
         const saved = localStorage.getItem('rs_menu_items');
         if (saved) {
@@ -229,11 +287,12 @@
       const [isEditMode, setIsEditMode] = useState(false);
       const [productModal, setProductModal] = useState({ open: false, item: null });
 
-      // PROMO VOUCHER (Sheets Integration)
+      // Promos
       const [promosList, setPromosList] = useState([]);
       const [isLoadingPromos, setIsLoadingPromos] = useState(false);
       const [isSyncingSheets, setIsSyncingSheets] = useState(false);
 
+      // Customer Cart & Checkout
       const [cart, setCart] = useState([]);
       const [selectedCategory, setSelectedCategory] = useState('Semua');
       const [selectedProduct, setSelectedProduct] = useState(null);
@@ -247,50 +306,33 @@
       const [promoInput, setPromoInput] = useState('');
       const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
-      // Daftar Voucher Pengguna (Mendukung format Array maupun JSON String dari Database/Spreadsheet)
-      const userVouchers = useMemo(() => {
-        if (!currentUser || !currentUser.myVouchers) return [];
-        if (typeof currentUser.myVouchers === 'string') {
-          try {
-            const parsed = JSON.parse(currentUser.myVouchers);
-            return Array.isArray(parsed) ? parsed : [];
-          } catch (e) {
-            return [];
-          }
-        }
-        return Array.isArray(currentUser.myVouchers) ? currentUser.myVouchers : [];
-      }, [currentUser]);
-
-      // POS Kasir State
+      // POS Kasir
       const [posCategory, setPosCategory] = useState('Semua');
       const [posSearchQuery, setPosSearchQuery] = useState('');
       const [posCart, setPosCart] = useState([]);
       const [isPosCartModalOpen, setIsPosCartModalOpen] = useState(false);
       const [isPosPaymentModalOpen, setIsPosPaymentModalOpen] = useState(false);
       const [posCustomerName, setPosCustomerName] = useState('Pelanggan Umum');
-      const [posDiscountType, setPosDiscountType] = useState('none'); // 'none' | 'percent' | 'fixed'
+      const [posDiscountType, setPosDiscountType] = useState('none');
       const [posDiscountValue, setPosDiscountValue] = useState(0);
-      const [posPaymentMethod, setPosPaymentMethod] = useState('Tunai'); // 'Tunai' | 'QRIS' | 'Transfer'
+      const [posPaymentMethod, setPosPaymentMethod] = useState('Tunai');
       const [posCashReceived, setPosCashReceived] = useState(0);
       const [isListeningVoice, setIsListeningVoice] = useState(false);
-      const [historyFilter, setHistoryFilter] = useState('Semua'); // 'Hari Ini' | 'Shift Aktif' | 'Semua'
+      const [historyFilter, setHistoryFilter] = useState('Hari Ini');
       const [historySearch, setHistorySearch] = useState('');
       const [isCleaningDuplicates, setIsCleaningDuplicates] = useState(false);
 
-      // Modal & Notification State
+      // Modal & Notif
       const [activeOrderReceipt, setActiveOrderReceipt] = useState(null);
       const [scanQRInput, setScanQRInput] = useState('');
       const [qrModalOpen, setQrModalOpen] = useState(false);
       const [notification, setNotification] = useState(null);
       const [adminPromoModal, setAdminPromoModal] = useState({ open: false, item: null });
 
-      // Persistence Effects
+      // Persistence
       useEffect(() => {
-        if (currentUser) {
-          localStorage.setItem('rs_current_user', JSON.stringify(currentUser));
-        } else {
-          localStorage.removeItem('rs_current_user');
-        }
+        if (currentUser) localStorage.setItem('rs_current_user', JSON.stringify(currentUser));
+        else localStorage.removeItem('rs_current_user');
       }, [currentUser]);
 
       useEffect(() => {
@@ -309,7 +351,15 @@
         localStorage.setItem('rs_menu_items', JSON.stringify(menuItems));
       }, [menuItems]);
 
-      // Ambil Seluruh Data POS Langsung dari Google Sheets saat Web Dibuka / Refresh
+      useEffect(() => {
+        localStorage.setItem('rs_qris_withdrawn', String(qrisWithdrawn));
+      }, [qrisWithdrawn]);
+
+      useEffect(() => {
+        localStorage.setItem('rs_saldo_fisik_terakhir', String(saldoFisikTerakhir));
+      }, [saldoFisikTerakhir]);
+
+      // Ambil Seluruh Data POS & Sheet Mutasi Kas Langsung dari Google Sheets
       const fetchAllDataFromSpreadsheet = async (showNotification = false) => {
         setIsSyncingSheets(true);
         setIsLoadingPromos(true);
@@ -321,22 +371,90 @@
           try {
             result = JSON.parse(rawText);
           } catch (jsonErr) {
-            console.warn('Apps Script mengembalikan respons HTML:', rawText.slice(0, 120));
-            if (rawText.includes('<!DOCTYPE') || rawText.includes('<html')) {
-              if (showNotification) {
-                showToast("Izin Web App: Ubah 'Who has access' ke 'Anyone' saat Deploy!", 'error');
-              }
-            }
+            if (showNotification) showToast("Izin Web App: Ubah 'Who has access' ke 'Anyone' saat Deploy!", 'error');
             return;
           }
 
-          if (result && result.success) {
-            if (Array.isArray(result.menu) && result.menu.length > 0) setMenuItems(result.menu);
+          if (result && (result.success || Array.isArray(result.orders) || Array.isArray(result.menu))) {
+            // Normalisasi Menu
+            const menuData = result.menu || result.menuItems;
+            if (Array.isArray(menuData) && menuData.length > 0) {
+              setMenuItems(menuData.map(m => ({
+                id: m.id || `m_${Date.now()}_${Math.random()}`,
+                name: m.name || m.nama || 'Menu',
+                category: m.category || m.kategori || 'Coffee',
+                price: Number(m.price || m.harga || 0),
+                desc: m.desc || m.deskripsi || '',
+                image: m.image || m.gambar || 'https://images.bukaolshop.com/hosting/38154/08b5850b46db416355.png',
+                stock: Number(m.stock || m.stok || 40)
+              })));
+            }
+
             if (Array.isArray(result.promos)) setPromosList(result.promos);
-            if (Array.isArray(result.orders)) setOrders(result.orders);
-            if (Array.isArray(result.expenses)) setExpenses(result.expenses);
+            
+            // Normalisasi Orders / Riwayat Pesanan dari Google Sheets
+            const rawOrders = result.orders || result.riwayat || result.pesanan;
+            if (Array.isArray(rawOrders)) {
+              const normalizedOrders = rawOrders.map(o => {
+                let itemsList = o.items || o.detail || [];
+                if (typeof itemsList === 'string') {
+                  try { itemsList = JSON.parse(itemsList); } catch (e) {
+                    itemsList = [{ name: itemsList, qty: 1, price: Number(o.totalAmount || o.total || 0) }];
+                  }
+                }
+                const totalAmt = Number(o.totalAmount !== undefined ? o.totalAmount : (o.total || o.totalHarga || o.nominal || 0));
+                return {
+                  orderNo: String(o.orderNo || o.noPesanan || o.id || `RS-${Math.floor(100000 + Math.random() * 900000)}`),
+                  source: o.source || (o.customerPhone ? 'pos_kasir' : 'customer_web'),
+                  customerName: o.customerName || o.namaPelanggan || o.customer || 'Pelanggan',
+                  customerPhone: o.customerPhone || o.noHp || o.telepon || '-',
+                  items: Array.isArray(itemsList) ? itemsList : [],
+                  subtotal: Number(o.subtotal || totalAmt),
+                  discountAmount: Number(o.discountAmount || o.diskon || 0),
+                  appliedVoucher: o.appliedVoucher || o.voucher || null,
+                  totalAmount: totalAmt,
+                  paymentMethod: o.paymentMethod || o.metode || o.pembayaran || 'Tunai',
+                  cashReceived: Number(o.cashReceived || o.bayar || totalAmt),
+                  change: Number(o.change || o.kembalian || 0),
+                  status: o.status || 'Lunas',
+                  createdAt: o.createdAt || o.tanggal || o.waktu || o.date || new Date().toISOString(),
+                  cashier: o.cashier || o.kasir || 'Kasir 1',
+                  qrReceiptCode: o.qrReceiptCode || o.qrCode || `QR-${o.orderNo || Date.now()}`,
+                  pointsEarned: Number(o.pointsEarned || o.poin || Math.floor(totalAmt / 1000)),
+                  qrClaimed: Boolean(o.qrClaimed)
+                };
+              });
+              setOrders(normalizedOrders);
+            }
+
+            // Normalisasi Belanja / Expenses
+            const rawExpenses = result.expenses || result.belanja || result.pengeluaran;
+            if (Array.isArray(rawExpenses)) {
+              setExpenses(rawExpenses.map(e => ({
+                id: e.id || `exp_${Date.now()}_${Math.random()}`,
+                title: e.title || e.nama || e.barang || 'Keperluan Toko',
+                supplier: e.supplier || e.toko || '-',
+                amount: Number(e.amount || e.nominal || e.biaya || 0),
+                date: e.date || e.tanggal || kasPeriodDates.todayStr,
+                createdAt: e.createdAt || e.waktu || new Date().toISOString(),
+                status: e.status || 'Selesai'
+              })));
+            }
+
             if (result.shift && typeof result.shift.isOpen === 'boolean') setShiftState(result.shift);
-            if (showNotification) showToast('Data Kasir, Menu & Sheets berhasil disinkronkan! 🔄');
+            
+            // Tangkap Saldo Fisik Terakhir dari berbagai kemungkinan key return dari sheet
+            const sheetSaldo = result.saldoFisikTerakhir !== undefined ? result.saldoFisikTerakhir
+              : result.saldoFisik !== undefined ? result.saldoFisik
+              : (result.mutasiKas && result.mutasiKas.saldoFisikTerakhir !== undefined) ? result.mutasiKas.saldoFisikTerakhir
+              : (result.mutasiKas && result.mutasiKas.saldoTerakhir !== undefined) ? result.mutasiKas.saldoTerakhir
+              : undefined;
+
+            if (sheetSaldo !== undefined) {
+              setSaldoFisikTerakhir(Number(sheetSaldo));
+            }
+
+            if (showNotification) showToast('Data Kasir, Menu & Mutasi Kas Sheets berhasil disinkronkan! 🔄');
           }
         } catch (err) {
           console.error('Koneksi Google Sheets terputus:', err);
@@ -353,15 +471,9 @@
           const rawText = await res.text();
           try {
             const result = JSON.parse(rawText);
-            if (result && result.success && Array.isArray(result.promos)) {
-              setPromosList(result.promos);
-            }
-          } catch (e) {
-            // Abaikan jika respons server bukan JSON valid
-          }
-        } catch (err) {
-          console.error('Gagal mengambil promo:', err);
-        }
+            if (result && result.success && Array.isArray(result.promos)) setPromosList(result.promos);
+          } catch (e) {}
+        } catch (err) {}
       };
 
       useEffect(() => {
@@ -396,26 +508,7 @@
             claimedQRs: updatedUser.claimedQRs,
             usedPromoCodes: updatedUser.usedPromoCodes || []
           });
-        } catch (err) {
-          console.error('Gagal sync ke spreadsheet:', err);
-        }
-      };
-
-      const handleCleanDuplicates = async () => {
-        setIsCleaningDuplicates(true);
-        showToast('Sedang merapikan & membersihkan data member ganda...');
-        try {
-          const res = await postToDatabase({ action: 'cleanDuplicates' });
-          if (res && res.success) {
-            showToast(res.message || `Berhasil membersihkan ${res.duplicatesRemoved || 0} data ganda! 🎉`);
-          } else {
-            showToast(res?.message || 'Gagal membersihkan data ganda', 'error');
-          }
-        } catch (err) {
-          showToast('Koneksi terputus saat merapikan database', 'error');
-        } finally {
-          setIsCleaningDuplicates(false);
-        }
+        } catch (err) {}
       };
 
       const showToast = (message, type = 'success') => {
@@ -436,7 +529,6 @@
           setPinError('');
           setIsPinModalOpen(true);
         } else {
-          // Klik dihitung senyap tanpa notifikasi toast
           clickTimerRef.current = setTimeout(() => { setLogoClicks(0); }, 2500);
         }
       };
@@ -548,7 +640,6 @@
         showToast(`+${count}x ${product.name} masuk kasir!`);
       };
 
-      // Simpan Menu Baru atau Update Menu ke State & Google Sheets
       const handleSaveProduct = async (productData) => {
         setMenuItems(prev => {
           const idx = prev.findIndex(p => p.id === productData.id);
@@ -561,25 +652,18 @@
         });
         setProductModal({ open: false, item: null });
         showToast(`Menu "${productData.name}" berhasil disimpan! 🎉`);
-
         try {
           await postToDatabase({ action: 'saveMenuItem', item: productData });
-        } catch (err) {
-          console.error('Gagal simpan menu ke Sheets:', err);
-        }
+        } catch (err) {}
       };
 
-      // Hapus Menu dari State & Google Sheets
       const handleDeleteProduct = async (productId) => {
         setMenuItems(prev => prev.filter(p => p.id !== productId));
         setProductModal({ open: false, item: null });
         showToast('Menu berhasil dihapus!');
-
         try {
           await postToDatabase({ action: 'deleteMenuItem', id: productId });
-        } catch (err) {
-          console.error('Gagal hapus menu dari Sheets:', err);
-        }
+        } catch (err) {}
       };
 
       const updatePosCartQty = (productId, delta) => {
@@ -646,12 +730,9 @@
               parse_mode: 'Markdown'
             })
           });
-        } catch (error) {
-          console.error("Gagal notifikasi Telegram:", error);
-        }
+        } catch (error) {}
       };
 
-      // Customer Checkout: Langsung Masuk ke Database Sheets & Muncul di Kasir!
       const handleProcessCheckout = async () => {
         if (cart.length === 0) return;
 
@@ -709,7 +790,6 @@
 
         sendTelegramNotification(newOrder);
 
-        // Tambah ke state kasir
         setOrders(prev => [newOrder, ...prev]);
         setActiveOrderReceipt(newOrder);
         setCart([]);
@@ -718,15 +798,11 @@
         setCheckoutStep('cart');
         showToast(`Pesanan ${orderNo} berhasil dibuat & masuk antrean Kasir! ☕`, 'new-order');
 
-        // Simpan permanen ke Spreadsheet
         try {
           await postToDatabase({ action: 'saveOrder', order: newOrder });
-        } catch (err) {
-          console.error('Gagal simpan order ke Sheets:', err);
-        }
+        } catch (err) {}
       };
 
-      // Kasir Selesaikan Transaksi Offline
       const handleCompletePosOrder = async () => {
         if (posCart.length === 0) return;
 
@@ -749,7 +825,7 @@
           change: posChange,
           status: 'Lunas',
           createdAt: new Date().toISOString(),
-          cashier: shiftState.cashierName || 'Roy',
+          cashier: shiftState.cashierName || 'Kasir 1',
           qrReceiptCode,
           pointsEarned: earned,
           qrClaimed: false
@@ -758,7 +834,6 @@
         setOrders(prev => [newPosOrder, ...prev]);
         sendTelegramNotification(newPosOrder);
 
-        // Reset POS cart
         setPosCart([]);
         setPosDiscountType('none');
         setPosDiscountValue(0);
@@ -766,23 +841,18 @@
         setIsPosPaymentModalOpen(false);
         setIsPosCartModalOpen(false);
 
-        // Buka Struk
         setActiveOrderReceipt(newPosOrder);
         showToast(`Transaksi ${orderNo} selesai & tersimpan permanen! 🎉`, 'new-order');
 
-        // Simpan permanen ke Google Sheets
         try {
           await postToDatabase({ action: 'saveOrder', order: newPosOrder });
-        } catch (err) {
-          console.error('Gagal simpan order kasir ke Google Sheets:', err);
-        }
+        } catch (err) {}
       };
 
-      // Konfirmasi Pesanan Web oleh Kasir
       const handleConfirmWebOrder = async (orderNo) => {
         setOrders(prev => prev.map(o => {
           if (o.orderNo === orderNo) {
-            return { ...o, status: 'Lunas', cashier: shiftState.cashierName || 'Roy' };
+            return { ...o, status: 'Lunas', cashier: shiftState.cashierName || 'Kasir 1' };
           }
           return o;
         }));
@@ -793,11 +863,9 @@
             action: 'updateOrderStatus',
             orderNo: orderNo,
             status: 'Lunas',
-            cashier: shiftState.cashierName || 'Roy'
+            cashier: shiftState.cashierName || 'Kasir 1'
           });
-        } catch (err) {
-          console.error('Gagal update status pesanan di Google Sheets:', err);
-        }
+        } catch (err) {}
       };
 
       const memberLevel = useMemo(() => {
@@ -934,29 +1002,270 @@
         showToast(`Berhasil menukarkan "${reward.name}"! Voucher tersimpan.`);
       };
 
+      const userVouchers = useMemo(() => {
+        if (!currentUser || !currentUser.myVouchers) return [];
+        if (typeof currentUser.myVouchers === 'string') {
+          try {
+            const parsed = JSON.parse(currentUser.myVouchers);
+            return Array.isArray(parsed) ? parsed : [];
+          } catch (e) {
+            return [];
+          }
+        }
+        return Array.isArray(currentUser.myVouchers) ? currentUser.myVouchers : [];
+      }, [currentUser]);
+
+      // Perhitungan Keuangan & Analitik Khusus Periode Kas (Hari Ini vs Kemarin)
+      const kasPeriodDates = useMemo(() => {
+        const todayStr = getISODateStr(new Date());
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        const yesterdayStr = getISODateStr(yesterday);
+        return { todayStr, yesterdayStr };
+      }, []);
+
+      const periodFilteredOrders = useMemo(() => {
+        const targetDate = kasPeriod === 'Hari Ini' ? kasPeriodDates.todayStr : kasPeriodDates.yesterdayStr;
+        return orders.filter(o => {
+          if (!o.createdAt) return false;
+          const orderDate = getLocalDateStr(o.createdAt);
+          return orderDate === targetDate;
+        });
+      }, [orders, kasPeriod, kasPeriodDates]);
+
+      const periodFilteredExpenses = useMemo(() => {
+        const targetDate = kasPeriod === 'Hari Ini' ? kasPeriodDates.todayStr : kasPeriodDates.yesterdayStr;
+        return expenses.filter(e => {
+          const expDate = getLocalDateStr(e.date || e.createdAt);
+          return expDate === targetDate || (kasPeriod === 'Hari Ini' && e.date === 'Hari ini');
+        });
+      }, [expenses, kasPeriod, kasPeriodDates]);
+
+      // Rekap Shift Kasir Berjalan
+      const currentShiftSummary = useMemo(() => {
+        const shiftOpenTime = shiftState.isOpen && shiftState.openedAt ? new Date(shiftState.openedAt) : null;
+        
+        const shiftOrders = orders.filter(o => {
+          if (o.status !== 'Lunas') return false;
+          if (!shiftOpenTime) return false;
+          return new Date(o.createdAt) >= shiftOpenTime;
+        });
+
+        const shiftExpenses = expenses.filter(e => {
+          if (!shiftOpenTime || !e.createdAt) return false;
+          return new Date(e.createdAt) >= shiftOpenTime;
+        });
+
+        const cashIn = shiftOrders.filter(o => o.paymentMethod === 'Tunai').reduce((s, o) => s + (o.totalAmount || 0), 0);
+        const nonCashIn = shiftOrders.filter(o => o.paymentMethod !== 'Tunai').reduce((s, o) => s + (o.totalAmount || 0), 0);
+        const expenseTotal = shiftExpenses.reduce((s, e) => s + (e.amount || 0), 0);
+
+        const modalAwal = shiftState.modalAwal || 0;
+        const sisaModalLaci = Math.max(0, modalAwal - expenseTotal);
+        const totalFisikDiMeja = sisaModalLaci + cashIn;
+
+        return {
+          modalAwal,
+          expenseTotal,
+          sisaModalLaci,
+          cashIn,
+          nonCashIn,
+          totalFisikDiMeja
+        };
+      }, [orders, expenses, shiftState]);
+
+      // Sinkronisasi Uang Fisik Kas: Mengikuti Mutlak Saldo Fisik Terakhir dari Google Sheets
       const financialSummary = useMemo(() => {
-        const cashOrders = orders.filter(o => o.status === 'Lunas' && o.paymentMethod === 'Tunai');
-        const qrisOrders = orders.filter(o => o.status === 'Lunas' && o.paymentMethod !== 'Tunai');
+        const cashOrders = periodFilteredOrders.filter(o => o.status === 'Lunas' && o.paymentMethod === 'Tunai');
+        const qrisOrders = periodFilteredOrders.filter(o => o.status === 'Lunas' && o.paymentMethod !== 'Tunai');
 
         const totalCashIn = cashOrders.reduce((sum, o) => sum + o.totalAmount, 0);
-        const totalQrisIn = qrisOrders.reduce((sum, o) => sum + o.totalAmount, 0);
-        const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
+        const rawQrisTotal = qrisOrders.reduce((sum, o) => sum + o.totalAmount, 0);
+        const totalExpenses = periodFilteredExpenses.reduce((sum, e) => sum + e.amount, 0);
+
+        // Saldo QRIS dapat ditarik hingga Rp 0
+        const activeQrisBalance = Math.max(0, rawQrisTotal - qrisWithdrawn);
 
         const modalAwal = shiftState.isOpen ? (shiftState.modalAwal || 0) : 0;
-        const totalFisik = modalAwal + totalCashIn - totalExpenses;
-        const omsetKotor = totalCashIn + totalQrisIn;
+        
+        // TOTAL UANG FISIK: Mengikuti Mutlak data Google Sheets Mutasi Kas (saldoFisikTerakhir)
+        // Jika data dari sheet belum termuat, gunakan perhitungan lokal sebagai cadangan
+        const totalFisik = saldoFisikTerakhir !== 0 
+          ? saldoFisikTerakhir 
+          : (modalAwal + totalCashIn - totalExpenses);
+
+        const omsetKotor = totalCashIn + rawQrisTotal;
         const omsetBersih = omsetKotor - totalExpenses;
 
         return {
           totalCashIn,
-          totalQrisIn,
+          totalQrisIn: activeQrisBalance,
+          rawQrisTotal,
           totalExpenses,
           modalAwal,
           totalFisik,
           omsetKotor,
           omsetBersih
         };
-      }, [orders, expenses, shiftState]);
+      }, [periodFilteredOrders, periodFilteredExpenses, shiftState, qrisWithdrawn, saldoFisikTerakhir]);
+
+      // Analisis Penjualan Makanan & Minuman
+      const salesBreakdown = useMemo(() => {
+        let foodPortions = 0;
+        let foodRevenue = 0;
+        const foodMap = {};
+
+        let drinkCups = 0;
+        let drinkRevenue = 0;
+        const drinkMap = {};
+
+        const validOrders = periodFilteredOrders.filter(o => o.status === 'Lunas');
+
+        validOrders.forEach(ord => {
+          if (Array.isArray(ord.items)) {
+            ord.items.forEach(it => {
+              const qty = Number(it.qty) || 1;
+              const price = Number(it.price) || 0;
+              const revenue = price * qty;
+              const cat = it.category || '';
+              const isFood = cat.toLowerCase() === 'cemilan' || it.name.toLowerCase().includes('kebab') || it.name.toLowerCase().includes('burger');
+
+              if (isFood) {
+                foodPortions += qty;
+                foodRevenue += revenue;
+                if (!foodMap[it.name]) {
+                  foodMap[it.name] = { name: it.name, qty: 0, price: price, omset: 0 };
+                }
+                foodMap[it.name].qty += qty;
+                foodMap[it.name].omset += revenue;
+              } else {
+                drinkCups += qty;
+                drinkRevenue += revenue;
+                if (!drinkMap[it.name]) {
+                  drinkMap[it.name] = { name: it.name, qty: 0, price: price, omset: 0 };
+                }
+                drinkMap[it.name].qty += qty;
+                drinkMap[it.name].omset += revenue;
+              }
+            });
+          }
+        });
+
+        const foodLabaFlat = foodPortions * 3000;
+        const drinkLabaFlat = drinkCups * 3000;
+
+        const totalItemsCount = foodPortions + drinkCups;
+        const foodPercent = totalItemsCount > 0 ? Math.round((foodPortions / totalItemsCount) * 100) : 39;
+        const drinkPercent = totalItemsCount > 0 ? (100 - foodPercent) : 61;
+
+        return {
+          foodPortions,
+          foodRevenue,
+          foodLabaFlat,
+          foodItemsList: Object.values(foodMap),
+          drinkCups,
+          drinkRevenue,
+          drinkLabaFlat,
+          drinkItemsList: Object.values(drinkMap),
+          foodPercent,
+          drinkPercent
+        };
+      }, [periodFilteredOrders]);
+
+      // Buka Modal Shift dengan inisialisasi state
+      const handleOpenShiftModal = () => {
+        if (!shiftState.isOpen) {
+          setShiftModalInputName(shiftState.cashierName || 'Kasir 1');
+          setShiftModalInputModal(100000);
+        } else {
+          setUangFisikNyataInput(currentShiftSummary.totalFisikDiMeja);
+        }
+        setIsShiftModalOpen(true);
+      };
+
+      // Mulai Shift Kasir Baru
+      const handleStartShift = async () => {
+        const name = shiftModalInputName.trim() || 'Kasir 1';
+        const modal = Number(shiftModalInputModal) || 0;
+        const newShift = {
+          isOpen: true,
+          cashierName: name,
+          modalAwal: modal,
+          openedAt: new Date().toISOString()
+        };
+        setShiftState(newShift);
+        setIsShiftModalOpen(false);
+        showToast(`Shift Kasir dibuka oleh ${name} (Modal: Rp ${modal.toLocaleString('id-ID')})! 🎉`);
+        try {
+          await postToDatabase({ action: 'saveShift', shift: newShift });
+        } catch (err) {}
+      };
+
+      // Tutup Shift Kasir
+      const handleCloseShift = async () => {
+        const closedShift = {
+          ...shiftState,
+          isOpen: false,
+          closedAt: new Date().toISOString(),
+          uangFisikNyata: uangFisikNyataInput,
+          selisihKas: uangFisikNyataInput - currentShiftSummary.totalFisikDiMeja
+        };
+        setShiftState(closedShift);
+        setIsShiftModalOpen(false);
+        showToast('Shift Kasir berhasil ditutup dan tersimpan!');
+        try {
+          await postToDatabase({ action: 'saveShift', shift: closedShift });
+        } catch (err) {}
+      };
+
+      // Salin Laporan Shift ke WhatsApp Owner
+      const handleCopyWhatsAppReport = () => {
+        const selisih = uangFisikNyataInput - currentShiftSummary.totalFisikDiMeja;
+        const selisihText = selisih === 0 ? 'Pas (Rp 0)' : selisih > 0 ? `Lebih (+Rp ${selisih.toLocaleString('id-ID')})` : `Kurang (-Rp ${Math.abs(selisih).toLocaleString('id-ID')})`;
+        const startTimeStr = shiftState.openedAt ? new Date(shiftState.openedAt).toLocaleString('id-ID') : '-';
+
+        const text = 
+`*LAPORAN REKAP & SELESAI SHIFT - RUANG SEDUH* ☕
+-----------------------------------------
+Kasir Bertugas: *${shiftState.cashierName}*
+Waktu Mulai: ${startTimeStr}
+Waktu Selesai: ${new Date().toLocaleString('id-ID')}
+
+*REKAP KAS MODAL KASIR (LACI):*
+(+) Saldo Modal Awal: Rp ${currentShiftSummary.modalAwal.toLocaleString('id-ID')}
+(-) Belanja Operasional Toko: -Rp ${currentShiftSummary.expenseTotal.toLocaleString('id-ID')}
+(=) Sisa Uang Modal Kasir: *Rp ${currentShiftSummary.sisaModalLaci.toLocaleString('id-ID')}*
+
+*HASIL PENJUALAN SHIFT INI:*
+(+) Penjualan Tunai: +Rp ${currentShiftSummary.cashIn.toLocaleString('id-ID')}
+Penjualan Non-Tunai (QRIS): Rp ${currentShiftSummary.nonCashIn.toLocaleString('id-ID')}
+
+*TOTAL UANG TUNAI FISIK DI MEJA:*
+*Rp ${currentShiftSummary.totalFisikDiMeja.toLocaleString('id-ID')}*
+(Sisa Modal Laci + Penjualan Tunai)
+
+*Uang Fisik Nyata di Kasir:* Rp ${uangFisikNyataInput.toLocaleString('id-ID')}
+*Status Selisih Kas:* *${selisihText}*
+-----------------------------------------
+Laporan otomatis dibuat dari POS Pintar Ruang Seduh`;
+
+        navigator.clipboard?.writeText?.(text);
+        showToast('Laporan WhatsApp berhasil disalin ke clipboard! 📋');
+        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+      };
+
+      // Tarik Saldo QRIS
+      const handleWithdrawQris = (amount) => {
+        const withdrawVal = Number(amount);
+        if (isNaN(withdrawVal) || withdrawVal <= 0) return showToast('Nominal penarikan tidak valid', 'error');
+        if (withdrawVal > financialSummary.totalQrisIn) return showToast('Saldo QRIS tidak mencukupi!', 'error');
+
+        const newWithdrawn = qrisWithdrawn + withdrawVal;
+        setQrisWithdrawn(newWithdrawn);
+        setIsWithdrawModalOpen(false);
+        setWithdrawAmountInput('');
+        showToast(`Penarikan QRIS sebesar Rp ${withdrawVal.toLocaleString('id-ID')} berhasil dicatat!`);
+      };
 
       return (
         <div className={`min-h-screen ${darkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-800'} transition-colors duration-200 font-sans pb-28 md:pb-8 relative overflow-x-hidden`}>
@@ -973,7 +1282,6 @@
           <header className={`sticky top-0 z-30 backdrop-blur-md border-b ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white/90 border-slate-200'} px-4 py-3 shadow-sm`}>
             <div className="max-w-xl mx-auto flex items-center justify-between">
               
-              {/* Logo & Judul */}
               <div className="flex items-center gap-3 cursor-pointer select-none group" onClick={handleLogoClick}>
                 <div className={`w-10 h-10 rounded-xl ${activeRole === 'admin' ? 'bg-gradient-to-tr from-emerald-600 to-teal-400' : 'bg-gradient-to-tr from-[#0B8F5A] to-emerald-400'} flex items-center justify-center text-white shadow-md`}>
                   {activeRole === 'admin' ? <Store className="w-6 h-6 text-white" /> : <Coffee className="w-6 h-6 text-amber-200" />}
@@ -1003,7 +1311,6 @@
                 </div>
               </div>
 
-              {/* Action Buttons */}
               <div className="flex items-center gap-2">
                 {activeRole === 'customer' ? (
                   !currentUser ? (
@@ -1021,11 +1328,10 @@
                   </button>
                 )}
 
-                {/* Tombol Sinkronisasi Data Google Sheets */}
                 {activeRole === 'admin' && (
                   <button 
                     onClick={() => fetchAllDataFromSpreadsheet(true)} 
-                    title="Sinkronkan Data dengan Google Sheets" 
+                    title="Sinkronkan Data & Mutasi Kas Sheets" 
                     className={`p-2.5 rounded-xl border ${isSyncingSheets ? 'bg-amber-100 text-amber-700 border-amber-300 animate-spin' : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'}`}
                   >
                     <RefreshCw className="w-5 h-5" />
@@ -1037,7 +1343,7 @@
                 </button>
 
                 {activeRole === 'admin' && (
-                  <button onClick={() => setIsShiftModalOpen(true)} title="Kelola Shift Kasir" className="p-2.5 bg-amber-100 dark:bg-amber-950/50 text-amber-600 rounded-xl border border-amber-200">
+                  <button onClick={handleOpenShiftModal} title="Kelola Buka/Tutup Shift" className="p-2.5 bg-amber-100 dark:bg-amber-950/50 text-amber-600 rounded-xl border border-amber-200">
                     <RefreshCw className="w-5 h-5" />
                   </button>
                 )}
@@ -1048,7 +1354,7 @@
           <main className="max-w-xl mx-auto px-4 pt-4 w-full">
             
             {/* ========================================================================= */}
-            {/* MODE PELANGGAN (CUSTOMER STOREFRONT)                                      */}
+            {/* MODE PELANGGAN (STOREFRONT PEMBELI UTUH 100%)                              */}
             {/* ========================================================================= */}
             {activeRole === 'customer' ? (
               <div>
@@ -1073,7 +1379,6 @@
                   </button>
                 </nav>
 
-                {/* BERANDA */}
                 {currentTab === 'home' && (
                   <div className="space-y-6">
                     <div className={`relative overflow-hidden rounded-3xl p-6 bg-gradient-to-r ${memberLevel.color} text-slate-900 shadow-xl`}>
@@ -1136,7 +1441,6 @@
                   </div>
                 )}
 
-                {/* MENU */}
                 {currentTab === 'menu' && (
                   <div className="space-y-5">
                     <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
@@ -1170,7 +1474,6 @@
                   </div>
                 )}
 
-                {/* REWARD */}
                 {currentTab === 'reward' && (
                   <div className="space-y-6">
                     <div className="bg-slate-900 text-white p-6 rounded-3xl border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl">
@@ -1207,9 +1510,7 @@
                               <div key={p.id} className="bg-white dark:bg-slate-900 border border-amber-500/30 dark:border-slate-800 rounded-2xl p-4 shadow-sm flex flex-col justify-between space-y-3 relative overflow-hidden">
                                 <div className="flex justify-between items-start">
                                   <div>
-                                    <span className="text-[10px] font-bold text-amber-600 bg-amber-50 dark:bg-amber-950 px-2 py-0.5 rounded uppercase font-mono">
-                                      {p.code}
-                                    </span>
+                                    <span className="text-[10px] font-bold text-amber-600 bg-amber-50 dark:bg-amber-950 px-2 py-0.5 rounded uppercase font-mono">{p.code}</span>
                                     <h4 className="font-bold text-sm mt-1.5">{p.title}</h4>
                                   </div>
                                   <span className="text-xs font-black text-[#0B8F5A]">
@@ -1266,7 +1567,6 @@
                   </div>
                 )}
 
-                {/* ORDERS */}
                 {currentTab === 'orders' && (
                   <div className="space-y-4">
                     <h2 className="text-xl font-bold flex items-center gap-2"><Clock className="w-5 h-5 text-[#0B8F5A]" /> Riwayat Pesanan Saya</h2>
@@ -1296,7 +1596,6 @@
                   </div>
                 )}
 
-                {/* PROFILE */}
                 {currentTab === 'profile' && (
                   <div className="space-y-6 max-w-xl mx-auto">
                     {currentUser ? (
@@ -1344,7 +1643,6 @@
                   </div>
                 )}
 
-                {/* Floating Cart Button */}
                 <div className="fixed bottom-20 md:bottom-8 right-4 z-40">
                   <button onClick={() => { setIsCartOpen(true); setCheckoutStep('cart'); }} className="bg-[#0B8F5A] text-white p-4 rounded-2xl shadow-2xl flex items-center gap-3 border-2 border-amber-400 active:scale-95 transition">
                     <div className="relative">
@@ -1358,7 +1656,6 @@
                   </button>
                 </div>
 
-                {/* Mobile Bottom Nav */}
                 <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-2 py-2 flex justify-around shadow-lg">
                   {[
                     { id: 'home', label: 'Beranda', icon: Coffee },
@@ -1377,7 +1674,7 @@
             ) : (
 
               /* ========================================================================= */
-              /* MODE KASIR & ADMIN PINTAR (DIPADUKAN LENGKAP DENGAN SPREADSHEET)           */
+              /* MODE KASIR & ADMIN PINTAR (DIPADUKAN MUTASI KAS & LAPORAN ANALITIK)       */
               /* ========================================================================= */
               <div className="space-y-4 max-w-4xl mx-auto">
                 
@@ -1388,10 +1685,10 @@
                       <div className="w-8 h-8 rounded-xl bg-amber-700/60 flex items-center justify-center font-bold">⚠️</div>
                       <div>
                         <h4 className="text-xs font-bold leading-none">Shift Belum Dibuka!</h4>
-                        <p className="text-[11px] text-amber-100 mt-0.5">Buka shift kasir & input saldo modal awal kedai.</p>
+                        <p className="text-[11px] text-amber-100 mt-0.5">Buka shift kasir & input saldo modal awal laci.</p>
                       </div>
                     </div>
-                    <button onClick={() => setIsShiftModalOpen(true)} className="bg-white text-amber-800 px-3.5 py-1.5 rounded-xl text-xs font-extrabold shadow hover:bg-amber-50">
+                    <button onClick={handleOpenShiftModal} className="bg-white text-amber-800 px-3.5 py-1.5 rounded-xl text-xs font-extrabold shadow hover:bg-amber-50">
                       Buka Shift
                     </button>
                   </div>
@@ -1401,7 +1698,7 @@
                       <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
                       <span>Shift Aktif: <strong>{shiftState.cashierName}</strong> (Modal: Rp {shiftState.modalAwal?.toLocaleString('id-ID')})</span>
                     </div>
-                    <button onClick={() => setIsShiftModalOpen(true)} className="underline text-emerald-200 text-[11px]">Tutup Shift</button>
+                    <button onClick={handleOpenShiftModal} className="underline text-emerald-200 text-[11px]">Rekap & Selesai Shift</button>
                   </div>
                 )}
 
@@ -1409,7 +1706,6 @@
                 {adminTab === 'kasir' && (
                   <div className="space-y-4">
                     
-                    {/* KOTAK VOICE ORDER PINTAR */}
                     <div className="bg-slate-900 text-white p-4 rounded-3xl border border-slate-800 shadow-xl space-y-3">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -1438,7 +1734,6 @@
                       </div>
                     </div>
 
-                    {/* BILAH KELOLA MENU & MODE EDIT PRODUK */}
                     <div className="flex items-center justify-between bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
                       <div className="flex items-center gap-2">
                         <span className="w-2.5 h-2.5 rounded-full bg-[#0B8F5A]"></span>
@@ -1467,7 +1762,6 @@
                       </div>
                     </div>
 
-                    {/* SEARCH INPUT MENU KASIR */}
                     <div className="relative">
                       <Search className="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400" />
                       <input 
@@ -1484,11 +1778,10 @@
                       )}
                     </div>
 
-                    {/* FILTER CHIPS (TAMPILAN WRAP TANPA SWIPE KE SAMPING) */}
                     <div className="flex flex-wrap gap-2 text-xs">
                       {[
                         { label: `Semua (${menuItems.length})`, val: 'Semua' },
-                        { label: '🌯 Kebab', val: 'Cemilan' },
+                        { label: '🌯 Makanan', val: 'Cemilan' },
                         { label: '🍵 Matcha', val: 'Signature' },
                         { label: '☕ Kopi', val: 'Coffee' },
                         { label: '🍃 Non Coffee', val: 'Non Coffee' },
@@ -1504,7 +1797,6 @@
                       ))}
                     </div>
 
-                    {/* GRID MENU KASIR (KLIK KARTU LANGSUNG MENAMBAHKAN / MEMBUKA MODAL JIKA MODE EDIT) */}
                     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-3">
                       {menuItems
                         .filter(item => (posCategory === 'Semua' || item.category === posCategory) && item.name.toLowerCase().includes(posSearchQuery.toLowerCase()))
@@ -1514,11 +1806,8 @@
                             <div 
                               key={item.id} 
                               onClick={() => {
-                                if (isEditMode) {
-                                  setProductModal({ open: true, item });
-                                } else {
-                                  addToPosCart(item, 1);
-                                }
+                                if (isEditMode) setProductModal({ open: true, item });
+                                else addToPosCart(item, 1);
                               }}
                               className={`bg-white dark:bg-slate-900 border rounded-2xl p-3 shadow-sm flex flex-col justify-between cursor-pointer select-none active:scale-95 transition-all duration-150 hover:shadow-md relative ${
                                 isEditMode 
@@ -1528,7 +1817,6 @@
                                     : 'border-slate-200 dark:border-slate-800 hover:border-[#0B8F5A]'
                               }`}
                             >
-                              {/* Badge Edit Mode */}
                               {isEditMode && (
                                 <div className="absolute top-2 right-2 bg-amber-500 text-slate-900 text-[10px] font-black px-2 py-0.5 rounded-full shadow">
                                   ✏️ Edit
@@ -1568,7 +1856,6 @@
                         })}
                     </div>
 
-                    {/* FLOATING BOTTOM BAR KASIR */}
                     {posTotalCount > 0 && (
                       <div className="fixed bottom-20 md:bottom-6 left-4 right-4 z-40 max-w-xl mx-auto">
                         <div className="bg-[#0B8F5A] text-white p-3.5 rounded-2xl shadow-2xl flex items-center justify-between border border-emerald-400">
@@ -1597,21 +1884,45 @@
                   </div>
                 )}
 
-                {/* TAB 2: RIWAYAT ORDER KASIR (ORDER ONLINE PELANGGAN MASUK KE SINI) */}
+                {/* TAB 2: RIWAYAT ORDER KASIR */}
                 {adminTab === 'riwayat' && (
                   <div className="space-y-4">
                     
-                    <div className="relative">
-                      <Search className="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400" />
-                      <input 
-                        type="text" 
-                        value={historySearch} 
-                        onChange={(e) => setHistorySearch(e.target.value)} 
-                        placeholder="Cari Riwayat Order Kasir / No. HP..." 
-                        className="w-full pl-10 pr-10 py-2.5 rounded-2xl border dark:border-slate-800 bg-white dark:bg-slate-900 text-xs outline-none focus:ring-2 focus:ring-[#0B8F5A]"
-                      />
+                    {/* SEARCH INPUT & REFRESH BUTTON */}
+                    <div className="flex items-center gap-2">
+                      <div className="relative flex-1">
+                        <Search className="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400" />
+                        <input 
+                          type="text" 
+                          value={historySearch} 
+                          onChange={(e) => setHistorySearch(e.target.value)} 
+                          placeholder="Cari Riwayat Order Kasir / No. HP..." 
+                          className="w-full pl-10 pr-10 py-2.5 rounded-2xl border dark:border-slate-800 bg-white dark:bg-slate-900 text-xs outline-none focus:ring-2 focus:ring-[#0B8F5A]"
+                        />
+                        {historySearch && (
+                          <button onClick={() => setHistorySearch('')} className="absolute right-3.5 top-3 text-slate-400">
+                            <X className="w-4 h-4" />
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Tombol Refresh Data Orderan dari Google Sheets */}
+                      <button
+                        onClick={() => fetchAllDataFromSpreadsheet(true)}
+                        disabled={isSyncingSheets}
+                        title="Segarkan / Refresh Data Orderan dari Sheets"
+                        className={`p-2.5 rounded-2xl border flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm text-xs font-bold ${
+                          isSyncingSheets 
+                            ? 'bg-amber-100 text-amber-700 border-amber-300 animate-pulse' 
+                            : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-[#0B8F5A] hover:bg-emerald-50 dark:hover:bg-emerald-950'
+                        }`}
+                      >
+                        <RefreshCw className={`w-4 h-4 ${isSyncingSheets ? 'animate-spin text-amber-600' : 'text-[#0B8F5A]'}`} />
+                        <span className="hidden sm:inline">{isSyncingSheets ? 'Memuat...' : 'Refresh'}</span>
+                      </button>
                     </div>
 
+                    {/* Filter Pills Hari Ini / Shift Aktif / Semua */}
                     <div className="flex items-center gap-2">
                       {['Hari Ini', 'Shift Aktif', 'Semua'].map(f => (
                         <button 
@@ -1624,87 +1935,127 @@
                       ))}
                     </div>
 
-                    <div className="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
-                      <span>Riwayat Order Kasir & Web</span>
-                      <span className="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">{orders.length} Pesanan</span>
-                    </div>
+                    {/* Riwayat List Filter Calculation */}
+                    {(() => {
+                      const todayDateStr = kasPeriodDates.todayStr;
+                      const filteredList = orders.filter(ord => {
+                        if (historySearch) {
+                          const q = historySearch.toLowerCase();
+                          const matchNo = ord.orderNo && ord.orderNo.toLowerCase().includes(q);
+                          const matchName = ord.customerName && ord.customerName.toLowerCase().includes(q);
+                          const matchPhone = ord.customerPhone && String(ord.customerPhone).includes(q);
+                          if (!matchNo && !matchName && !matchPhone) return false;
+                        }
 
-                    <div className="space-y-3">
-                      {orders
-                        .filter(ord => {
-                          if (historySearch && !ord.orderNo.toLowerCase().includes(historySearch.toLowerCase()) && !ord.customerName.toLowerCase().includes(historySearch.toLowerCase())) {
-                            return false;
-                          }
-                          return true;
-                        })
-                        .map(order => {
-                          const isWebOrder = order.source === 'customer_web';
-                          const isPending = order.status === 'Menunggu Konfirmasi';
-                          return (
-                            <div key={order.orderNo} className={`bg-white dark:bg-slate-900 border ${isPending ? 'border-amber-400 ring-2 ring-amber-400/20' : 'border-slate-200 dark:border-slate-800'} rounded-3xl p-4 shadow-sm space-y-3`}>
-                              
-                              <div className="flex items-start justify-between">
-                                <div className="flex items-center gap-3">
-                                  <div className={`w-10 h-10 rounded-2xl flex items-center justify-center font-bold ${isWebOrder ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}`}>
-                                    {isWebOrder ? <ShoppingBag className="w-5 h-5" /> : <User className="w-5 h-5" />}
-                                  </div>
-                                  <div>
-                                    <div className="flex items-center gap-2">
-                                      <h4 className="font-bold text-sm text-slate-800 dark:text-slate-100">{order.customerName}</h4>
-                                      {isWebOrder && (
-                                        <span className="text-[9px] bg-amber-500/20 text-amber-700 dark:text-amber-400 font-extrabold px-1.5 py-0.5 rounded">
-                                          ORDER WEB
+                        if (historyFilter === 'Hari Ini') {
+                          if (!ord.createdAt) return false;
+                          const ordDate = getLocalDateStr(ord.createdAt);
+                          return ordDate === todayDateStr;
+                        }
+
+                        if (historyFilter === 'Shift Aktif') {
+                          if (!shiftState.isOpen || !shiftState.openedAt) return false;
+                          return new Date(ord.createdAt) >= new Date(shiftState.openedAt);
+                        }
+
+                        return true;
+                      });
+
+                      return (
+                        <>
+                          <div className="flex items-center justify-between text-xs font-bold text-slate-500 px-1">
+                            <span>Riwayat Order ({historyFilter})</span>
+                            <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-extrabold ${filteredList.length > 0 ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-slate-200 text-slate-600 dark:bg-slate-800 dark:text-slate-400'}`}>
+                              {filteredList.length} Pesanan
+                            </span>
+                          </div>
+
+                          <div className="space-y-3">
+                            {filteredList.length === 0 ? (
+                              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 text-center space-y-2 shadow-sm">
+                                <Clock className="w-10 h-10 text-slate-300 mx-auto" />
+                                <h4 className="font-bold text-sm text-slate-700 dark:text-slate-200">
+                                  {historyFilter === 'Hari Ini' ? 'Belum Ada Pesanan Hari Ini' : historyFilter === 'Shift Aktif' ? 'Belum Ada Pesanan Pada Shift Ini' : 'Belum Ada Riwayat Pesanan'}
+                                </h4>
+                                <p className="text-xs text-slate-400">
+                                  {historyFilter === 'Hari Ini' 
+                                    ? 'Transaksi kasir atau orderan pelanggan web yang masuk hari ini akan tampil di sini.' 
+                                    : 'Pesanan baru akan otomatis masuk dan diperbarui secara real-time.'}
+                                </p>
+                              </div>
+                            ) : (
+                              filteredList.map(order => {
+                                const isWebOrder = order.source === 'customer_web';
+                                const isPending = order.status === 'Menunggu Konfirmasi';
+                                return (
+                                  <div key={order.orderNo} className={`bg-white dark:bg-slate-900 border ${isPending ? 'border-amber-400 ring-2 ring-amber-400/20' : 'border-slate-200 dark:border-slate-800'} rounded-3xl p-4 shadow-sm space-y-3`}>
+                                    
+                                    <div className="flex items-start justify-between">
+                                      <div className="flex items-center gap-3">
+                                        <div className={`w-10 h-10 rounded-2xl flex items-center justify-center font-bold ${isWebOrder ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}`}>
+                                          {isWebOrder ? <ShoppingBag className="w-5 h-5" /> : <User className="w-5 h-5" />}
+                                        </div>
+                                        <div>
+                                          <div className="flex items-center gap-2">
+                                            <h4 className="font-bold text-sm text-slate-800 dark:text-slate-100">{order.customerName}</h4>
+                                            {isWebOrder && (
+                                              <span className="text-[9px] bg-amber-500/20 text-amber-700 dark:text-amber-400 font-extrabold px-1.5 py-0.5 rounded">
+                                                ORDER WEB
+                                              </span>
+                                            )}
+                                          </div>
+                                          <p className="text-[11px] text-slate-400 font-mono">
+                                            {order.orderNo} • {new Date(order.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                          </p>
+                                        </div>
+                                      </div>
+
+                                      <div className="text-right">
+                                        <span className="text-sm font-black text-slate-900 dark:text-white block">Rp {order.totalAmount?.toLocaleString('id-ID')}</span>
+                                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${order.status === 'Lunas' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
+                                          {order.paymentMethod} • {order.status}
                                         </span>
-                                      )}
+                                      </div>
                                     </div>
-                                    <p className="text-[11px] text-slate-400 font-mono">
-                                      {order.orderNo} • {new Date(order.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                    </p>
+
+                                    <div className="bg-slate-50 dark:bg-slate-800/60 p-2.5 rounded-xl text-xs space-y-1">
+                                      {order.items?.map((it, idx) => (
+                                        <div key={idx} className="flex justify-between text-slate-600 dark:text-slate-300">
+                                          <span><strong>{it.qty}x</strong> {it.name}</span>
+                                          <span className="text-slate-400">Rp {(it.price * it.qty).toLocaleString('id-ID')}</span>
+                                        </div>
+                                      ))}
+                                    </div>
+
+                                    <div className="flex items-center justify-between pt-1 text-xs">
+                                      <span className="text-slate-400 font-medium">Kasir: <strong>{order.cashier || 'Kasir 1'}</strong></span>
+                                      
+                                      <div className="flex gap-2">
+                                        {isPending && (
+                                          <button 
+                                            onClick={() => handleConfirmWebOrder(order.orderNo)} 
+                                            className="bg-[#0B8F5A] text-white px-3 py-1.5 rounded-xl font-bold text-xs shadow flex items-center gap-1"
+                                          >
+                                            <Check className="w-3.5 h-3.5" /> Konfirmasi Lunas
+                                          </button>
+                                        )}
+                                        <button 
+                                          onClick={() => setActiveOrderReceipt(order)} 
+                                          className="bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800 text-[#0B8F5A] px-3 py-1.5 rounded-xl font-bold text-xs flex items-center gap-1.5"
+                                        >
+                                          <FileText className="w-3.5 h-3.5" /> Lihat Struk
+                                        </button>
+                                      </div>
+                                    </div>
+
                                   </div>
-                                </div>
-
-                                <div className="text-right">
-                                  <span className="text-sm font-black text-slate-900 dark:text-white block">Rp {order.totalAmount?.toLocaleString('id-ID')}</span>
-                                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${order.status === 'Lunas' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
-                                    {order.paymentMethod} • {order.status}
-                                  </span>
-                                </div>
-                              </div>
-
-                              <div className="bg-slate-50 dark:bg-slate-800/60 p-2.5 rounded-xl text-xs space-y-1">
-                                {order.items?.map((it, idx) => (
-                                  <div key={idx} className="flex justify-between text-slate-600 dark:text-slate-300">
-                                    <span><strong>{it.qty}x</strong> {it.name}</span>
-                                    <span className="text-slate-400">Rp {(it.price * it.qty).toLocaleString('id-ID')}</span>
-                                  </div>
-                                ))}
-                              </div>
-
-                              <div className="flex items-center justify-between pt-1 text-xs">
-                                <span className="text-slate-400 font-medium">Kasir: <strong>{order.cashier || 'Roy'}</strong></span>
-                                
-                                <div className="flex gap-2">
-                                  {isPending && (
-                                    <button 
-                                      onClick={() => handleConfirmWebOrder(order.orderNo)} 
-                                      className="bg-[#0B8F5A] text-white px-3 py-1.5 rounded-xl font-bold text-xs shadow flex items-center gap-1"
-                                    >
-                                      <Check className="w-3.5 h-3.5" /> Konfirmasi Lunas
-                                    </button>
-                                  )}
-                                  <button 
-                                    onClick={() => setActiveOrderReceipt(order)} 
-                                    className="bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800 text-[#0B8F5A] px-3 py-1.5 rounded-xl font-bold text-xs flex items-center gap-1.5"
-                                  >
-                                    <FileText className="w-3.5 h-3.5" /> Lihat Struk
-                                  </button>
-                                </div>
-                              </div>
-
-                            </div>
-                          );
-                        })}
-                    </div>
+                                );
+                              })
+                            )}
+                          </div>
+                        </>
+                      );
+                    })()}
 
                   </div>
                 )}
@@ -1722,84 +2073,184 @@
                       </button>
                     </div>
 
+                    <div className="flex items-center gap-2">
+                      {['Hari Ini', 'Kemarin', 'Semua'].map(f => (
+                        <button 
+                          key={f} 
+                          onClick={() => setExpenseFilter(f)} 
+                          className={`px-4 py-1.5 rounded-xl text-xs font-bold transition ${expenseFilter === f ? 'bg-[#0B8F5A] text-white shadow' : 'bg-white dark:bg-slate-900 border text-slate-600 dark:text-slate-300'}`}
+                        >
+                          {f === 'Hari Ini' ? '📅 Hari Ini' : f === 'Kemarin' ? '📅 Kemarin' : '📋 Semua'}
+                        </button>
+                      ))}
+                    </div>
+
                     <div className="space-y-3">
-                      {expenses.length === 0 ? (
-                        <p className="text-xs text-slate-400 italic py-6 text-center">Belum ada catatan belanja tersimpan.</p>
-                      ) : (
-                        expenses.map(exp => (
-                          <div key={exp.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm flex items-center justify-between">
-                            <div className="flex items-center gap-3">
-                              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-[#0B8F5A] flex items-center justify-center font-bold">
-                                <Package className="w-5 h-5" />
+                      {expenses
+                        .filter(exp => {
+                          if (expenseFilter === 'Hari Ini') return exp.date === kasPeriodDates.todayStr || exp.date === 'Hari ini';
+                          if (expenseFilter === 'Kemarin') return exp.date === kasPeriodDates.yesterdayStr;
+                          return true;
+                        })
+                        .length === 0 ? (
+                          <p className="text-xs text-slate-400 italic py-6 text-center">Belum ada catatan belanja tersimpan untuk periode ini.</p>
+                        ) : (
+                          expenses
+                            .filter(exp => {
+                              if (expenseFilter === 'Hari Ini') return exp.date === kasPeriodDates.todayStr || exp.date === 'Hari ini';
+                              if (expenseFilter === 'Kemarin') return exp.date === kasPeriodDates.yesterdayStr;
+                              return true;
+                            })
+                            .map(exp => (
+                              <div key={exp.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                  <div className="w-10 h-10 rounded-xl bg-emerald-100 text-[#0B8F5A] flex items-center justify-center font-bold">
+                                    <Package className="w-5 h-5" />
+                                  </div>
+                                  <div>
+                                    <h4 className="font-bold text-xs sm:text-sm">{exp.title}</h4>
+                                    <p className="text-[11px] text-slate-400">{exp.date} • {exp.supplier}</p>
+                                  </div>
+                                </div>
+                                <div className="text-right flex items-center gap-3">
+                                  <div>
+                                    <span className="text-sm font-black text-rose-600 block">-Rp {exp.amount.toLocaleString('id-ID')}</span>
+                                    <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">{exp.status}</span>
+                                  </div>
+                                  <button 
+                                    onClick={() => {
+                                      setExpenses(prev => prev.filter(e => e.id !== exp.id));
+                                      showToast('Catatan belanja dihapus');
+                                    }} 
+                                    className="text-slate-300 hover:text-rose-500 p-1"
+                                  >
+                                    <X className="w-4 h-4" />
+                                  </button>
+                                </div>
                               </div>
-                              <div>
-                                <h4 className="font-bold text-xs sm:text-sm">{exp.title}</h4>
-                                <p className="text-[11px] text-slate-400">{exp.date} • {exp.supplier}</p>
-                              </div>
-                            </div>
-                            <div className="text-right">
-                              <span className="text-sm font-black text-rose-600 block">-Rp {exp.amount.toLocaleString('id-ID')}</span>
-                              <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">{exp.status}</span>
-                            </div>
-                          </div>
-                        ))
-                      )}
+                            ))
+                        )}
                     </div>
                   </div>
                 )}
 
-                {/* TAB 4: KAS UTAMA & BRANKAS OWNER */}
+                {/* TAB 4: KAS UTAMA, BRANKAS OWNER & DASHBOARD ANALITIK LAPORAN */}
                 {adminTab === 'brankas' && (
-                  <div className="space-y-4">
+                  <div className="space-y-5">
                     
+                    {/* TOGGLE 2 PILIHAN: HARI INI VS KEMARIN */}
+                    <div className="flex items-center justify-between bg-white dark:bg-slate-900 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                      <div className="flex gap-1 w-full">
+                        <button 
+                          onClick={() => setKasPeriod('Hari Ini')} 
+                          className={`flex-1 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 ${kasPeriod === 'Hari Ini' ? 'bg-[#0B8F5A] text-white shadow' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100'}`}
+                        >
+                          📅 Hari Ini
+                        </button>
+                        <button 
+                          onClick={() => setKasPeriod('Kemarin')} 
+                          className={`flex-1 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 ${kasPeriod === 'Kemarin' ? 'bg-[#0B8F5A] text-white shadow' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100'}`}
+                        >
+                          📅 Kemarin
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* KAS UTAMA & BRANKAS OWNER */}
                     <div className="bg-slate-900 text-white rounded-3xl p-6 border border-slate-800 shadow-xl space-y-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">💰</div>
                           <div>
                             <span className="text-xs font-black uppercase text-emerald-400">Kas Utama & Brankas Owner</span>
-                            <p className="text-[10px] text-slate-400">Uang Operasional & Setoran Kedai</p>
+                            <p className="text-[10px] text-slate-400">Uang Operasional & Setoran Kedai ({kasPeriod})</p>
                           </div>
                         </div>
                         <span className="text-xs font-bold bg-slate-800 text-slate-300 px-3 py-1 rounded-full border border-slate-700">Owner</span>
                       </div>
 
-                      <div className="pt-2">
-                        <span className="text-[11px] text-slate-400 font-semibold block uppercase">Total Uang Seharusnya Dipegang:</span>
-                        <h2 className="text-3xl font-black text-emerald-400 tracking-tight mt-1">
+                      {/* JUMLAH UANG KAS FISIK MUTLAK DARI SPREADSHEET MUTASI KAS */}
+                      <div className="pt-2 bg-slate-800/40 p-4 rounded-2xl border border-slate-700/60 space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[11px] text-slate-400 font-bold uppercase tracking-wider">Total Uang Fisik Harus Ada di Laci:</span>
+                          <span className="text-[10px] font-extrabold text-emerald-400 bg-emerald-950/80 border border-emerald-700 px-2 py-0.5 rounded-full">SINKRON MUTASI KAS</span>
+                        </div>
+                        <h2 className="text-3xl font-black text-emerald-400 tracking-tight">
                           Rp {financialSummary.totalFisik.toLocaleString('id-ID')}
                         </h2>
+
+                        <div className="text-[11px] text-slate-300 border-t border-slate-700/60 pt-2 space-y-1">
+                          <div className="flex justify-between items-center bg-emerald-900/30 p-1.5 rounded-lg border border-emerald-800/50">
+                            <span className="text-emerald-300 font-medium">• Saldo Fisik Terakhir (Sheet):</span>
+                            <span className="font-bold text-emerald-400">Rp {saldoFisikTerakhir.toLocaleString('id-ID')}</span>
+                          </div>
+                          <div className="flex justify-between px-1.5 pt-1">
+                            <span className="text-slate-400">• Penjualan Tunai ({kasPeriod}):</span>
+                            <span className="font-bold text-emerald-300">+Rp {financialSummary.totalCashIn.toLocaleString('id-ID')}</span>
+                          </div>
+                          <div className="flex justify-between px-1.5 pb-1">
+                            <span className="text-slate-400">• Belanja Operasional ({kasPeriod}):</span>
+                            <span className="font-bold text-rose-400">-Rp {financialSummary.totalExpenses.toLocaleString('id-ID')}</span>
+                          </div>
+                          <p className="text-[9px] text-slate-500 italic px-1.5 pt-1 border-t border-slate-700/50">Total kas laci fisik mengikuti mutlak data Saldo Fisik Terakhir dari Sheet Mutasi Kas.</p>
+                        </div>
                       </div>
 
+                      {/* SALDO QRIS / BANK LENGKAP DENGAN TOMBOL TARIK UANG (BISA JADI 0) */}
                       <div className="grid grid-cols-2 gap-3 pt-2 border-t border-slate-800">
                         <div className="bg-slate-800/80 p-3 rounded-2xl border border-slate-700">
-                          <span className="text-[10px] text-slate-400 font-bold block uppercase">Uang Tunai Fisik</span>
-                          <span className="text-lg font-black text-white">Rp {financialSummary.totalFisik.toLocaleString('id-ID')}</span>
+                          <span className="text-[10px] text-slate-400 font-bold block uppercase">Modal Kas Awal</span>
+                          <span className="text-lg font-black text-white">Rp {financialSummary.modalAwal.toLocaleString('id-ID')}</span>
                         </div>
-                        <div className="bg-slate-800/80 p-3 rounded-2xl border border-slate-700">
-                          <span className="text-[10px] text-slate-400 font-bold block uppercase">Saldo QRIS / Bank</span>
-                          <span className="text-lg font-black text-emerald-400">Rp {financialSummary.totalQrisIn.toLocaleString('id-ID')}</span>
+                        
+                        <div className="bg-slate-800/80 p-3 rounded-2xl border border-slate-700 flex flex-col justify-between">
+                          <div>
+                            <div className="flex items-center justify-between">
+                              <span className="text-[10px] text-slate-400 font-bold block uppercase">Saldo QRIS / Bank</span>
+                              {qrisWithdrawn > 0 && <span className="text-[9px] text-amber-400 font-semibold">(Telah Ditarik)</span>}
+                            </div>
+                            <span className="text-lg font-black text-emerald-400 block mt-0.5">
+                              Rp {financialSummary.totalQrisIn.toLocaleString('id-ID')}
+                            </span>
+                          </div>
+                          <div className="pt-2">
+                            <button 
+                              onClick={() => {
+                                setWithdrawAmountInput(String(financialSummary.totalQrisIn));
+                                setIsWithdrawModalOpen(true);
+                              }}
+                              className="w-full bg-[#0B8F5A] hover:bg-emerald-600 text-white py-1.5 rounded-xl font-bold text-[11px] shadow transition active:scale-95"
+                            >
+                              Tarik Uang (Cairkan)
+                            </button>
+                          </div>
                         </div>
-                      </div>
-
-                      <div className="flex items-center justify-between text-xs text-slate-400 pt-1">
-                        <span>Modal Awal: <strong>Rp {financialSummary.modalAwal.toLocaleString('id-ID')}</strong></span>
-                        <span>Total Belanja: <strong>-Rp {financialSummary.totalExpenses.toLocaleString('id-ID')}</strong></span>
                       </div>
 
                       <div className="grid grid-cols-2 gap-2 pt-2">
-                        <button onClick={() => setIsShiftModalOpen(true)} className="bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 rounded-xl font-bold text-xs shadow flex items-center justify-center gap-1.5">
-                          <RefreshCw className="w-4 h-4" /> Atur Shift & Modal
+                        <button onClick={handleOpenShiftModal} className="bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 rounded-xl font-bold text-xs shadow flex items-center justify-center gap-1.5">
+                          <RefreshCw className="w-4 h-4" /> Buka / Rekap Shift
                         </button>
-                        <button onClick={() => showToast('Riwayat mutasi brankas telah disinkronkan!')} className="bg-slate-800 hover:bg-slate-700 text-slate-200 py-2.5 rounded-xl font-bold text-xs border border-slate-700 flex items-center justify-center gap-1.5">
-                          📋 Mutasi
+                        <button onClick={() => fetchAllDataFromSpreadsheet(true)} className="bg-slate-800 hover:bg-slate-700 text-slate-200 py-2.5 rounded-xl font-bold text-xs border border-slate-700 flex items-center justify-center gap-1.5">
+                          📋 Sinkronkan Sheets
                         </button>
                       </div>
 
-                      {/* Tombol Pembersih Data Member Ganda */}
                       <div className="pt-2 border-t border-slate-800">
                         <button 
-                          onClick={handleCleanDuplicates}
+                          onClick={async () => {
+                            setIsCleaningDuplicates(true);
+                            showToast('Sedang merapikan & membersihkan data member ganda...');
+                            try {
+                              const res = await postToDatabase({ action: 'cleanDuplicates' });
+                              if (res && res.success) showToast(res.message || `Berhasil membersihkan ${res.duplicatesRemoved || 0} data ganda! 🎉`);
+                              else showToast(res?.message || 'Gagal membersihkan data ganda', 'error');
+                            } catch (err) {
+                              showToast('Koneksi terputus saat merapikan database', 'error');
+                            } finally {
+                              setIsCleaningDuplicates(false);
+                            }
+                          }}
                           disabled={isCleaningDuplicates}
                           className="w-full bg-slate-800/90 hover:bg-slate-800 text-amber-300 hover:text-amber-200 py-2.5 px-3 rounded-2xl font-bold text-xs border border-amber-500/30 flex items-center justify-center gap-2 transition active:scale-95 shadow"
                         >
@@ -1809,21 +2260,198 @@
                       </div>
                     </div>
 
+                    {/* KARTU OMSET KOTOR & BERSIH */}
                     <div className="grid grid-cols-2 gap-3">
                       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-3xl shadow-sm">
-                        <span className="text-[10px] font-bold uppercase text-slate-400">Omset Kotor</span>
+                        <span className="text-[10px] font-bold uppercase text-slate-400">Omset Kotor ({kasPeriod})</span>
                         <h3 className="text-xl font-black text-emerald-600 mt-1">Rp {financialSummary.omsetKotor.toLocaleString('id-ID')}</h3>
                       </div>
                       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-3xl shadow-sm">
-                        <span className="text-[10px] font-bold uppercase text-slate-400">Omset Bersih</span>
+                        <span className="text-[10px] font-bold uppercase text-slate-400">Omset Bersih ({kasPeriod})</span>
                         <h3 className="text-xl font-black text-[#0B8F5A] mt-1">Rp {financialSummary.omsetBersih.toLocaleString('id-ID')}</h3>
+                      </div>
+                    </div>
+
+                    {/* ========================================================================= */}
+                    {/* BAGIAN VISUAL PENJUALAN MAKANAN & MINUMAN                                 */}
+                    {/* ========================================================================= */}
+
+                    {/* 1. PENJUALAN MAKANAN */}
+                    <div className="bg-[#FFFDF7] dark:bg-slate-900 border border-amber-200/70 dark:border-amber-900/30 rounded-3xl p-5 shadow-sm space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-600 flex items-center justify-center font-bold text-lg">
+                            🥐
+                          </div>
+                          <div>
+                            <h3 className="font-extrabold text-sm text-slate-800 dark:text-slate-100">Penjualan Makanan</h3>
+                            <p className="text-[11px] text-slate-400">Snack, Pastry & Makanan Ringan</p>
+                          </div>
+                        </div>
+                        <span className="text-xs font-black text-amber-700 bg-amber-100 dark:bg-amber-950/80 px-2.5 py-1 rounded-full">
+                          {salesBreakdown.foodPortions} porsi
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="bg-white dark:bg-slate-800/80 p-3.5 rounded-2xl border border-amber-100 dark:border-amber-900/20 shadow-sm">
+                          <span className="text-[10px] font-bold uppercase text-slate-400 tracking-wider">OMSET MAKANAN</span>
+                          <h4 className="text-lg font-black text-slate-800 dark:text-slate-100 mt-1">
+                            Rp {salesBreakdown.foodRevenue.toLocaleString('id-ID')}
+                          </h4>
+                        </div>
+                        <div className="bg-white dark:bg-slate-800/80 p-3.5 rounded-2xl border border-amber-100 dark:border-amber-900/20 shadow-sm">
+                          <span className="text-[10px] font-bold uppercase text-slate-400 tracking-wider">LABA FLAT (@3RB)</span>
+                          <h4 className="text-lg font-black text-emerald-600 dark:text-emerald-400 mt-1">
+                            Rp {salesBreakdown.foodLabaFlat.toLocaleString('id-ID')}
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 2. PENJUALAN MINUMAN */}
+                    <div className="bg-[#F6FDFB] dark:bg-slate-900 border border-teal-200/70 dark:border-teal-900/30 rounded-3xl p-5 shadow-sm space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-2xl bg-teal-500/20 text-teal-600 flex items-center justify-center font-bold text-lg">
+                            ☕
+                          </div>
+                          <div>
+                            <h3 className="font-extrabold text-sm text-slate-800 dark:text-slate-100">Penjualan Minuman</h3>
+                            <p className="text-[11px] text-slate-400">Coffee, Non-Coffee & Signature</p>
+                          </div>
+                        </div>
+                        <span className="text-xs font-black text-teal-700 bg-teal-100 dark:bg-teal-950/80 px-2.5 py-1 rounded-full">
+                          {salesBreakdown.drinkCups} cup
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="bg-white dark:bg-slate-800/80 p-3.5 rounded-2xl border border-teal-100 dark:border-teal-900/20 shadow-sm">
+                          <span className="text-[10px] font-bold uppercase text-slate-400 tracking-wider">OMSET MINUMAN</span>
+                          <h4 className="text-lg font-black text-slate-800 dark:text-slate-100 mt-1">
+                            Rp {salesBreakdown.drinkRevenue.toLocaleString('id-ID')}
+                          </h4>
+                        </div>
+                        <div className="bg-white dark:bg-slate-800/80 p-3.5 rounded-2xl border border-teal-100 dark:border-teal-900/20 shadow-sm">
+                          <span className="text-[10px] font-bold uppercase text-slate-400 tracking-wider">LABA FLAT (@3RB)</span>
+                          <h4 className="text-lg font-black text-teal-600 dark:text-teal-400 mt-1">
+                            Rp {salesBreakdown.drinkLabaFlat.toLocaleString('id-ID')}
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 3. PERSENTASE RASIO MAKANAN VS MINUMAN */}
+                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm space-y-3">
+                      <div className="flex items-center justify-between text-xs font-bold">
+                        <span className="flex items-center gap-1.5 text-amber-600">
+                          <span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                          Makanan: {salesBreakdown.foodPercent}% ({salesBreakdown.foodPortions} porsi)
+                        </span>
+                        <span className="flex items-center gap-1.5 text-teal-600">
+                          <span className="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+                          Minuman: {salesBreakdown.drinkPercent}% ({salesBreakdown.drinkCups} cup)
+                        </span>
+                      </div>
+                      <div className="w-full h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden flex">
+                        <div style={{ width: `${salesBreakdown.foodPercent}%` }} className="h-full bg-amber-500 transition-all duration-500"></div>
+                        <div style={{ width: `${salesBreakdown.drinkPercent}%` }} className="h-full bg-teal-500 transition-all duration-500"></div>
+                      </div>
+                    </div>
+
+                    {/* 4. TABEL DAFTAR MAKANAN TERJUAL */}
+                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm">
+                      <div className="bg-amber-50/80 dark:bg-amber-950/30 p-3.5 border-b border-amber-100 dark:border-amber-900/20 flex items-center justify-between">
+                        <h4 className="text-xs font-black text-slate-800 dark:text-slate-100 flex items-center gap-1.5">
+                          <span>🥐</span>
+                          <span>Daftar Makanan Terjual</span>
+                        </h4>
+                        <span className="text-[11px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">
+                          {salesBreakdown.foodItemsList.length} Produk
+                        </span>
+                      </div>
+
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left text-xs">
+                          <thead>
+                            <tr className="border-b border-slate-100 dark:border-slate-800 text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                              <th className="py-2.5 px-4">MENU</th>
+                              <th className="py-2.5 px-2 text-center">PORSI</th>
+                              <th className="py-2.5 px-3 text-right">HARGA</th>
+                              <th className="py-2.5 px-3 text-right">OMSET</th>
+                              <th className="py-2.5 px-4 text-right text-emerald-600">LABA @3RB</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-medium">
+                            {salesBreakdown.foodItemsList.length === 0 ? (
+                              <tr>
+                                <td colSpan={5} className="py-4 text-center text-slate-400 italic text-[11px]">Belum ada makanan terjual pada periode {kasPeriod}.</td>
+                              </tr>
+                            ) : (
+                              salesBreakdown.foodItemsList.map((item, idx) => (
+                                <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                                  <td className="py-2.5 px-4 font-bold text-slate-800 dark:text-slate-100">{item.name}</td>
+                                  <td className="py-2.5 px-2 text-center font-black text-amber-600">{item.qty}</td>
+                                  <td className="py-2.5 px-3 text-right text-slate-500">Rp {item.price.toLocaleString('id-ID')}</td>
+                                  <td className="py-2.5 px-3 text-right font-black text-slate-800 dark:text-slate-100">Rp {item.omset.toLocaleString('id-ID')}</td>
+                                  <td className="py-2.5 px-4 text-right font-bold text-emerald-600">Rp {(item.qty * 3000).toLocaleString('id-ID')}</td>
+                                </tr>
+                              ))
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    {/* 5. TABEL DAFTAR MINUMAN TERJUAL */}
+                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm">
+                      <div className="bg-teal-50/80 dark:bg-teal-950/30 p-3.5 border-b border-teal-100 dark:border-teal-900/20 flex items-center justify-between">
+                        <h4 className="text-xs font-black text-slate-800 dark:text-slate-100 flex items-center gap-1.5">
+                          <span>☕</span>
+                          <span>Daftar Minuman Terjual</span>
+                        </h4>
+                        <span className="text-[11px] font-bold text-teal-700 bg-teal-100 px-2 py-0.5 rounded-full">
+                          {salesBreakdown.drinkItemsList.length} Produk
+                        </span>
+                      </div>
+
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left text-xs">
+                          <thead>
+                            <tr className="border-b border-slate-100 dark:border-slate-800 text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                              <th className="py-2.5 px-4">MENU</th>
+                              <th className="py-2.5 px-2 text-center">CUP</th>
+                              <th className="py-2.5 px-3 text-right">HARGA</th>
+                              <th className="py-2.5 px-3 text-right">OMSET</th>
+                              <th className="py-2.5 px-4 text-right text-teal-600">LABA @3RB</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-medium">
+                            {salesBreakdown.drinkItemsList.length === 0 ? (
+                              <tr>
+                                <td colSpan={5} className="py-4 text-center text-slate-400 italic text-[11px]">Belum ada minuman terjual pada periode {kasPeriod}.</td>
+                              </tr>
+                            ) : (
+                              salesBreakdown.drinkItemsList.map((item, idx) => (
+                                <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                                  <td className="py-2.5 px-4 font-bold text-slate-800 dark:text-slate-100">{item.name}</td>
+                                  <td className="py-2.5 px-2 text-center font-black text-teal-600">{item.qty}</td>
+                                  <td className="py-2.5 px-3 text-right text-slate-500">Rp {item.price.toLocaleString('id-ID')}</td>
+                                  <td className="py-2.5 px-3 text-right font-black text-slate-800 dark:text-slate-100">Rp {item.omset.toLocaleString('id-ID')}</td>
+                                  <td className="py-2.5 px-4 text-right font-bold text-teal-600">Rp {(item.qty * 3000).toLocaleString('id-ID')}</td>
+                                </tr>
+                              ))
+                            )}
+                          </tbody>
+                        </table>
                       </div>
                     </div>
 
                   </div>
                 )}
 
-                {/* TAB 5: KELOLA KODE PROMO GOOGLE SHEETS */}
+                {/* TAB 5: KELOLA KODE PROMO */}
                 {adminTab === 'promo' && (
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
@@ -1849,7 +2477,6 @@
                           <div className="flex gap-1">
                             <button onClick={() => setAdminPromoModal({ open: true, item: p })} className="p-2 text-amber-500 font-bold text-xs">Edit</button>
                             <button onClick={async () => {
-                              if (!confirm('Hapus promo ini?')) return;
                               showToast('Menghapus promo...');
                               await postToDatabase({ action: 'deletePromo', id: p.id });
                               fetchPromosFromSpreadsheet();
@@ -1888,6 +2515,257 @@
           {/* ========================================================================= */}
           {/* MODALS SECTION                                                            */}
           {/* ========================================================================= */}
+
+          {/* MODAL BUKA SHIFT & REKAP SELESAI SHIFT PERSIS SESUAI GAMBAR */}
+          {isShiftModalOpen && (
+            <div className="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+              {!shiftState.isOpen ? (
+                /* 1. TAMPILAN BUKA SHIFT KASIR BARU */
+                <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[32px] max-w-sm w-full p-6 space-y-5 shadow-2xl relative">
+                  <button onClick={() => setIsShiftModalOpen(false)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                    <X className="w-5 h-5" />
+                  </button>
+
+                  <div className="text-center space-y-2 pt-2">
+                    <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-[#0B8F5A] mx-auto flex items-center justify-center shadow-inner">
+                      <CashRegister className="w-8 h-8" />
+                    </div>
+                    <h3 className="font-extrabold text-lg text-slate-800 dark:text-slate-100">Buka Shift Kasir Baru</h3>
+                    <p className="text-xs text-slate-400 max-w-[260px] mx-auto leading-relaxed">
+                      Masukkan modal kas awal laci untuk belanja operasional & kembalian.
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-xs font-bold text-slate-700 dark:text-slate-200 block mb-1.5">Nama Kasir Bertugas</label>
+                      <input 
+                        type="text" 
+                        value={shiftModalInputName}
+                        onChange={(e) => setShiftModalInputName(e.target.value)}
+                        placeholder="Kasir 1" 
+                        className="w-full px-3.5 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-medium outline-none focus:ring-2 focus:ring-[#0B8F5A]"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-bold text-slate-700 dark:text-slate-200 block mb-1.5">Saldo Kas Modal Awal Laci (Rp)</label>
+                      <div className="relative">
+                        <span className="absolute left-3.5 top-3 text-xs font-bold text-slate-400">Rp</span>
+                        <input 
+                          type="number" 
+                          value={shiftModalInputModal}
+                          onChange={(e) => setShiftModalInputModal(Number(e.target.value))}
+                          placeholder="100.000" 
+                          className="w-full pl-9 pr-3.5 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-extrabold outline-none focus:ring-2 focus:ring-[#0B8F5A]"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Quick Select Buttons: Rp 0, 50k, 100k, 200k */}
+                    <div className="grid grid-cols-4 gap-2">
+                      {[
+                        { label: 'Rp 0', val: 0 },
+                        { label: '50k', val: 50000 },
+                        { label: '100k', val: 100000 },
+                        { label: '200k', val: 200000 }
+                      ].map(chip => (
+                        <button
+                          key={chip.label}
+                          type="button"
+                          onClick={() => setShiftModalInputModal(chip.val)}
+                          className={`py-1.5 rounded-xl text-xs font-bold transition border ${shiftModalInputModal === chip.val ? 'bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white border-slate-300' : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200'}`}
+                        >
+                          {chip.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <button 
+                    onClick={handleStartShift}
+                    className="w-full bg-[#0B8F5A] hover:bg-emerald-600 text-white py-3.5 rounded-2xl font-black text-xs shadow-lg flex items-center justify-center gap-2 active:scale-95 transition"
+                  >
+                    <span>▶ Mulai Shift Sekarang</span>
+                  </button>
+                </div>
+              ) : (
+                /* 2. TAMPILAN REKAP & SELESAI SHIFT */
+                <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[32px] max-w-sm w-full p-5 space-y-4 shadow-2xl relative my-auto">
+                  
+                  {/* Header */}
+                  <div className="flex items-center justify-between border-b pb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-base">🏁</span>
+                      <h3 className="font-extrabold text-sm text-slate-800 dark:text-slate-100">Rekap & Selesai Shift</h3>
+                    </div>
+                    <button onClick={() => setIsShiftModalOpen(false)} className="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center hover:text-slate-600">
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+
+                  {/* Info Kasir & Waktu */}
+                  <div className="space-y-1 text-xs">
+                    <div className="flex justify-between text-slate-500">
+                      <span>Kasir Bertugas:</span>
+                      <span className="font-bold text-slate-800 dark:text-slate-100">{shiftState.cashierName}</span>
+                    </div>
+                    <div className="flex justify-between text-slate-500">
+                      <span>Waktu Mulai Shift:</span>
+                      <span className="font-bold text-slate-800 dark:text-slate-100">
+                        {shiftState.openedAt ? new Date(shiftState.openedAt).toLocaleString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '-'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Rekap Kas Modal Kasir (Laci) */}
+                  <div className="space-y-1.5 pt-1">
+                    <span className="text-[10px] font-black text-amber-700 uppercase tracking-wider block">REKAP KAS MODAL KASIR (LACI):</span>
+                    <div className="flex justify-between text-xs text-slate-600 dark:text-slate-300">
+                      <span>(+) Saldo Modal Awal:</span>
+                      <span className="font-bold">Rp {currentShiftSummary.modalAwal.toLocaleString('id-ID')}</span>
+                    </div>
+                    <div className="flex justify-between text-xs text-rose-600">
+                      <span>(-) Belanja Operasional Toko:</span>
+                      <span className="font-bold">-Rp {currentShiftSummary.expenseTotal.toLocaleString('id-ID')}</span>
+                    </div>
+                    <div className="bg-[#FFF9E6] dark:bg-amber-950/40 p-2.5 rounded-xl flex justify-between items-center text-xs font-black text-amber-800 dark:text-amber-300 border border-amber-200/60">
+                      <span>(=) Sisa Uang Modal Kasir:</span>
+                      <span>Rp {currentShiftSummary.sisaModalLaci.toLocaleString('id-ID')}</span>
+                    </div>
+                  </div>
+
+                  {/* Hasil Penjualan Shift Ini */}
+                  <div className="space-y-1.5 pt-1">
+                    <span className="text-[10px] font-black text-emerald-700 uppercase tracking-wider block">HASIL PENJUALAN SHIFT INI:</span>
+                    <div className="flex justify-between text-xs text-emerald-600 font-medium">
+                      <span>(+) Penjualan Tunai:</span>
+                      <span className="font-bold">+Rp {currentShiftSummary.cashIn.toLocaleString('id-ID')}</span>
+                    </div>
+                    <div className="flex justify-between text-xs text-slate-500">
+                      <span>Penjualan Non-Tunai (QRIS/Transfer):</span>
+                      <span className="font-bold">Rp {currentShiftSummary.nonCashIn.toLocaleString('id-ID')}</span>
+                    </div>
+                  </div>
+
+                  {/* Total Uang Tunai Fisik di Meja */}
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-0.5">
+                    <div className="flex justify-between items-baseline">
+                      <span className="font-extrabold text-xs text-slate-800 dark:text-slate-100">Total Uang Tunai Fisik di Meja:</span>
+                      <span className="text-xl font-black text-[#0B8F5A]">Rp {currentShiftSummary.totalFisikDiMeja.toLocaleString('id-ID')}</span>
+                    </div>
+                    <p className="text-[10px] text-slate-400 italic text-right">(Sisa Modal Laci + Penjualan Tunai)</p>
+                  </div>
+
+                  {/* Input Hitung Uang Fisik Nyata di Kasir */}
+                  <div className="space-y-1.5 pt-1">
+                    <label className="text-[11px] font-bold text-slate-600 dark:text-slate-300 block">Hitung Uang Fisik Nyata di Kasir (Rp)</label>
+                    <div className="relative">
+                      <span className="absolute left-3.5 top-2.5 text-xs font-bold text-slate-400">Rp</span>
+                      <input 
+                        type="number"
+                        value={uangFisikNyataInput}
+                        onChange={(e) => setUangFisikNyataInput(Number(e.target.value))}
+                        className="w-full pl-9 pr-3.5 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-extrabold outline-none focus:ring-2 focus:ring-[#0B8F5A]"
+                      />
+                    </div>
+                    <div className="flex justify-between items-center text-xs pt-0.5">
+                      <span className="text-slate-500">Status Selisih Kas:</span>
+                      <span className={`font-black ${uangFisikNyataInput - currentShiftSummary.totalFisikDiMeja === 0 ? 'text-[#0B8F5A]' : uangFisikNyataInput - currentShiftSummary.totalFisikDiMeja > 0 ? 'text-amber-500' : 'text-rose-500'}`}>
+                        {uangFisikNyataInput - currentShiftSummary.totalFisikDiMeja === 0 ? 'Pas (Rp 0)' : uangFisikNyataInput - currentShiftSummary.totalFisikDiMeja > 0 ? `Lebih (+Rp ${(uangFisikNyataInput - currentShiftSummary.totalFisikDiMeja).toLocaleString('id-ID')})` : `Kurang (-Rp ${(Math.abs(uangFisikNyataInput - currentShiftSummary.totalFisikDiMeja)).toLocaleString('id-ID')})`}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="space-y-2 pt-2">
+                    <button 
+                      onClick={handleCopyWhatsAppReport}
+                      className="w-full bg-[#0B8F5A] hover:bg-emerald-600 text-white py-3 rounded-2xl font-bold text-xs shadow-md flex items-center justify-center gap-2 active:scale-95 transition"
+                    >
+                      <span>💬 Salin Laporan ke WhatsApp Owner</span>
+                    </button>
+                    
+                    <button 
+                      onClick={handleCloseShift}
+                      className="w-full bg-slate-900 hover:bg-slate-800 text-white py-3 rounded-2xl font-bold text-xs shadow-md flex items-center justify-center gap-2 active:scale-95 transition"
+                    >
+                      <span>☁ Tutup Shift & Simpan ke Sheets</span>
+                    </button>
+                  </div>
+
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* MODAL TARIK SALDO QRIS (BISA DITARIK HINGGA JADI RP 0) */}
+          {isWithdrawModalOpen && (
+            <div className="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl">
+                <div className="flex items-center justify-between border-b pb-2">
+                  <div className="flex items-center gap-2">
+                    <CreditCard className="w-5 h-5 text-[#0B8F5A]" />
+                    <h3 className="font-extrabold text-sm">Tarik Saldo QRIS / Bank</h3>
+                  </div>
+                  <button onClick={() => setIsWithdrawModalOpen(false)} className="text-slate-400">
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+
+                <div className="bg-emerald-50 dark:bg-emerald-950/40 p-3 rounded-2xl border border-emerald-200 dark:border-emerald-800 text-center">
+                  <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">SALDO QRIS TERSEDIA</span>
+                  <p className="text-2xl font-black text-[#0B8F5A] mt-0.5">Rp {financialSummary.totalQrisIn.toLocaleString('id-ID')}</p>
+                </div>
+
+                <div>
+                  <label className="text-[11px] font-bold block mb-1 text-slate-500 uppercase">Nominal Penarikan (Rp)</label>
+                  <input 
+                    type="number"
+                    value={withdrawAmountInput}
+                    onChange={(e) => setWithdrawAmountInput(e.target.value)}
+                    placeholder="0"
+                    className="w-full p-2.5 rounded-xl border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-mono font-bold outline-none"
+                  />
+                </div>
+
+                <div className="flex gap-2">
+                  <button 
+                    type="button"
+                    onClick={() => setWithdrawAmountInput(String(financialSummary.totalQrisIn))}
+                    className="flex-1 bg-amber-500 hover:bg-amber-600 text-slate-900 py-2 rounded-xl text-xs font-bold"
+                  >
+                    Tarik Semua (Jadikan Rp 0)
+                  </button>
+                  {qrisWithdrawn > 0 && (
+                    <button 
+                      type="button"
+                      onClick={() => {
+                        setQrisWithdrawn(0);
+                        setIsWithdrawModalOpen(false);
+                        showToast('Catatan penarikan QRIS berhasil di-reset!');
+                      }}
+                      className="px-3 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 py-2 rounded-xl text-xs font-bold"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+
+                <div className="flex gap-2 pt-2 border-t">
+                  <button onClick={() => setIsWithdrawModalOpen(false)} className="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 py-2.5 rounded-xl text-xs font-bold">
+                    Batal
+                  </button>
+                  <button 
+                    onClick={() => handleWithdrawQris(withdrawAmountInput)}
+                    className="flex-1 bg-[#0B8F5A] hover:bg-emerald-600 text-white py-2.5 rounded-xl text-xs font-black shadow"
+                  >
+                    Konfirmasi Tarik
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* MODAL 1: RINCIAN STRUK BELANJA KASIR */}
           {isPosCartModalOpen && (
@@ -2053,7 +2931,7 @@
 
                   <div className="text-[11px] space-y-0.5 py-1 border-b border-dashed border-slate-400">
                     <p>No: <strong>{activeOrderReceipt.orderNo}</strong></p>
-                    <p>Kasir: {activeOrderReceipt.cashier || 'Roy'}</p>
+                    <p>Kasir: {activeOrderReceipt.cashier || 'Kasir 1'}</p>
                     <p>Pelanggan: {activeOrderReceipt.customerName}</p>
                     <p>Metode: {activeOrderReceipt.paymentMethod} ({activeOrderReceipt.status})</p>
                   </div>
@@ -2102,90 +2980,20 @@
             </div>
           )}
 
-          {/* MODAL 4: MANAJEMEN SHIFT KASIR */}
-          {isShiftModalOpen && (
-            <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
-              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
-                <div className="flex items-center justify-between border-b pb-2">
-                  <h3 className="font-bold text-base flex items-center gap-2">
-                    <RefreshCw className="w-5 h-5 text-[#0B8F5A]" />
-                    Manajemen Shift Kasir
-                  </h3>
-                  <button onClick={() => setIsShiftModalOpen(false)} className="text-slate-400"><X className="w-5 h-5" /></button>
-                </div>
-
-                <div>
-                  <label className="text-[11px] font-bold block mb-1">Nama Kasir Bertugas</label>
-                  <input 
-                    type="text" 
-                    defaultValue={shiftState.cashierName || 'Roy'} 
-                    id="cashier-name-input"
-                    className="w-full p-2.5 rounded-xl border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-bold outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-[11px] font-bold block mb-1">Modal Awal Kas Laci (Rp)</label>
-                  <input 
-                    type="number" 
-                    defaultValue={shiftState.modalAwal || 261000} 
-                    id="modal-awal-input"
-                    className="w-full p-2.5 rounded-xl border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-mono font-bold outline-none"
-                  />
-                </div>
-
-                <div className="flex gap-2 pt-2">
-                  <button 
-                    onClick={async () => {
-                      const name = document.getElementById('cashier-name-input').value;
-                      const modal = Number(document.getElementById('modal-awal-input').value) || 0;
-                      const newShift = { isOpen: true, cashierName: name, modalAwal: modal, openedAt: new Date().toISOString() };
-                      setShiftState(newShift);
-                      setIsShiftModalOpen(false);
-                      showToast(`Shift Kasir dibuka oleh ${name}!`);
-                      try {
-                        await postToDatabase({ action: 'saveShift', shift: newShift });
-                      } catch (err) {
-                        console.error('Gagal simpan shift ke sheets:', err);
-                      }
-                    }} 
-                    className="flex-1 bg-[#0B8F5A] text-white py-3 rounded-xl font-bold text-xs shadow"
-                  >
-                    Buka Shift
-                  </button>
-                  <button 
-                    onClick={async () => {
-                      const closedShift = { ...shiftState, isOpen: false };
-                      setShiftState(closedShift);
-                      setIsShiftModalOpen(false);
-                      showToast('Shift Kasir telah ditutup.');
-                      try {
-                        await postToDatabase({ action: 'saveShift', shift: closedShift });
-                      } catch (err) {
-                        console.error('Gagal tutup shift ke sheets:', err);
-                      }
-                    }} 
-                    className="bg-rose-600 text-white px-4 py-3 rounded-xl font-bold text-xs shadow"
-                  >
-                    Tutup Shift
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
           {/* MODAL 5: CATAT BELANJA KEDAI */}
           {isExpenseModalOpen && (
             <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
               <form onSubmit={async (e) => {
                 e.preventDefault();
                 const fd = new FormData(e.target);
+                const customDate = fd.get('expense_date') || kasPeriodDates.todayStr;
                 const newExp = {
                   id: `exp_${Date.now()}`,
                   title: fd.get('title'),
                   supplier: fd.get('supplier') || 'Toko Langganan',
                   amount: Number(fd.get('amount')) || 0,
-                  date: 'Hari ini',
+                  date: customDate,
+                  createdAt: new Date().toISOString(),
                   status: 'Selesai'
                 };
                 setExpenses(prev => [newExp, ...prev]);
@@ -2193,13 +3001,16 @@
                 showToast('Catatan belanja berhasil ditambahkan!');
                 try {
                   await postToDatabase({ action: 'saveExpense', expense: newExp });
-                } catch (err) {
-                  console.error('Gagal simpan belanja ke sheets:', err);
-                }
+                } catch (err) {}
               }} className="bg-white dark:bg-slate-900 border rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
                 <div className="flex items-center justify-between border-b pb-2">
                   <h3 className="font-bold text-base">Catat Belanja Kedai</h3>
                   <button type="button" onClick={() => setIsExpenseModalOpen(false)} className="text-slate-400"><X className="w-5 h-5" /></button>
+                </div>
+
+                <div>
+                  <label className="text-[11px] font-bold block mb-1">Tanggal Belanja</label>
+                  <input name="expense_date" type="date" defaultValue={kasPeriodDates.todayStr} className="w-full p-2.5 rounded-xl border text-xs outline-none dark:bg-slate-800" />
                 </div>
 
                 <div>
@@ -2235,7 +3046,6 @@
                 if (!phone) return showToast('Masukkan nomor HP yang valid', 'error');
                 setIsLoadingAuth(true);
 
-                // CEK LANGSUNG KE DATA MEMBER LAMA ANDA UNTUK LOGIN INSTAN
                 if (authMode === 'login') {
                   const matchedExisting = EXISTING_MEMBERS.find(
                     m => formatPhoneNumber(m.phone) === phone && String(m.password).trim() === String(password).trim()
@@ -2432,7 +3242,6 @@
                           </div>
                         )}
 
-                        {/* DAFTAR STOK VOUCHER MILIK PENGGUNA */}
                         {showVoucherSelector && (
                           <div className="pt-2 border-t border-amber-500/20 space-y-2">
                             <div className="flex items-center justify-between text-[11px] font-semibold text-slate-600 dark:text-slate-300">
@@ -2635,7 +3444,6 @@
                   <p className="text-[11px] text-slate-400 mt-1">Akses khusus kasir & owner. Masukkan 4 digit PIN.</p>
                 </div>
 
-                {/* Display Dots PIN */}
                 <div className="flex justify-center items-center gap-3 py-2">
                   {[0, 1, 2, 3].map(i => (
                     <div 
@@ -2649,7 +3457,6 @@
                   <p className="text-xs text-rose-500 font-bold animate-pulse">{pinError}</p>
                 )}
 
-                {/* Keyboard Numpad Layar Sentuh */}
                 <div className="grid grid-cols-3 gap-2 pt-2">
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => (
                     <button
@@ -2728,7 +3535,7 @@
               }} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-sm w-full p-6 space-y-3.5 shadow-2xl">
                 <div className="flex items-center justify-between border-b pb-2">
                   <h3 className="font-bold text-base flex items-center gap-2">
-                    <span>{productModal.item ? '✏️ Edit Menu Minuman' : '＋ Tambah Menu Baru'}</span>
+                    <span>{productModal.item ? '✏️ Edit Menu' : '＋ Tambah Menu Baru'}</span>
                   </h3>
                   <button type="button" onClick={() => setProductModal({ open: false, item: null })} className="text-slate-400">
                     <X className="w-5 h-5" />
@@ -2741,7 +3548,7 @@
                     name="name" 
                     defaultValue={productModal.item?.name || ''} 
                     required 
-                    placeholder="Contoh: Kopi Gula Aren Special" 
+                    placeholder="Contoh: Kebab Daging Special" 
                     className="w-full p-2.5 rounded-xl border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-bold outline-none focus:ring-2 focus:ring-[#0B8F5A]"
                   />
                 </div>
@@ -2758,7 +3565,7 @@
                       <option value="Signature">Signature</option>
                       <option value="Non Coffee">Non Coffee</option>
                       <option value="Fresh Drink">Fresh Drink</option>
-                      <option value="Cemilan">Cemilan</option>
+                      <option value="Cemilan">Cemilan (Makanan)</option>
                     </select>
                   </div>
                   <div>
@@ -2802,7 +3609,7 @@
                     name="desc" 
                     rows={2} 
                     defaultValue={productModal.item?.desc || ''} 
-                    placeholder="Racikan kopi robusta dan susu..." 
+                    placeholder="Racikan bahan pilihan..." 
                     className="w-full p-2.5 rounded-xl border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs outline-none"
                   />
                 </div>
@@ -2811,11 +3618,7 @@
                   {productModal.item && (
                     <button 
                       type="button" 
-                      onClick={() => {
-                        if (confirm(`Hapus menu "${productModal.item.name}"?`)) {
-                          handleDeleteProduct(productModal.item.id);
-                        }
-                      }}
+                      onClick={() => handleDeleteProduct(productModal.item.id)}
                       className="bg-rose-600 hover:bg-rose-700 text-white px-3.5 py-3 rounded-xl font-bold text-xs shadow"
                     >
                       Hapus
